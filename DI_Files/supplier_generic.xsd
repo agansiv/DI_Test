@@ -1,0 +1,1579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Data Supplier Schema Definition for Core/Generic Supplier
+To be used in conjunction with commonTypesDI.xsd
+
+Version History
+===============
+Version 33 Hemal Patel 20 Oct 2015
+===============================================================
+IBA-1129: Internal/External key choice element in Opportunities, Opportunity Product, Opportunity Activity
+
+Version 32 Deepika Garg 12 Oct 2015 
+IBA-1227: Removed pattern restrictions on e-mail address as regex validation will be done DI validation.
+  
+==================================
+
+Version 31 Graeme Bell 07 Oct 2015 
+IBA-1290: Updated V30 comments 
+==================================
+
+Version 30 Graeme Bell 07 Oct 2015 
+==================================
+IBA-1290
+Added Elements status,endDate,reasonForClosure,closureSummary to Opportunity
+Added Element source to OpportunityActivities
+
+Version 29 - Deepika Garg 22 Sep 2015
+==================================
+Removed Min length = 1 on FinancialPaymentReference
+
+Version 28 - Deepika Garg 22 Sep 2015
+==================================
+Made FinancialPaymentReference non-mandatory
+
+Version 27 - Hemal Patel 16 Sep 2015
+==================================
+Made postcode non-mandatory
+
+Version 26 - Dave Budd 4 August 2015
+====================================
+Removed all annotations - issue with Sharepoint
+
+Version 25 - Dave Budd 4 August 2015
+====================================
+Removed all annotations 
+
+Version 24 - Dave Budd 12 Jun 2015
+==================================
+Removed minLength=1 from Initial
+
+Version 23 - Dave Budd 20Apr 2015
+=================================
+IBA-715 change externalTransactionId back to reference
+
+Version 22 - Dave Budd 20Apr 2015
+=================================
+IBA-652 allow spaces in between initials (but not enforced)
+
+Version 21 - Dave Budd 20Apr 2015
+=================================
+IBA-652 allow spaces in between initials
+
+Version 20 - Dave Budd 20Apr 2015
+=================================
+IN019455: Opportunity Start Date change from dateTime to date
+IN019457: Payment Received changed from dateTime to date
+
+Version 19 - Dave Budd 5 Mar 2015
+=================================
+Added Exclude from Agresso to Donation
+
+Version 18 - Dave Budd 19 Feb 2015
+==================================
+Added secondaryAddresses
+
+Version 17 - Dave Budd 17 Feb 2015
+==================================
+R19 First draft
+
+Version 16 - Dave Budd 14 Jan 2015
+==================================
+IN019037 - Product removed from SO
+
+Version 15 - Dave Budd 12 Jan 2015
+==================================
+IN019034 - GAD Type optional on DD
+IN019051 - Standing Order should 1:1 optional
+
+Version 14 - Dave Budd 19 Dec 2014
+==================================
+IN:019018 - DD Start Date made optional
+
+Version 13 - Dave Budd 19 Dec 2014
+==================================
+IN:019014 - Profiling Info Comments reduced from 255 to 250
+
+Version 12 - Dave Budd 16 Dec 2014
+==================================
+IN018880 - GAD Type mandatory on GAD
+
+Version 11 - Dave Budd 12 Dec 2014
+==================================
+IN018906 - DD RES Code length to 50
+
+Version 10 - Dave Budd 10 Dec 2014
+==================================
+IN:018955 - Pledge Amount must be > 0 
+
+Version 9 - Dave Budd 9 Dec 2014
+=================================
+IN:018945 - Numeric restrictions for Running Number and Campaign Recipient Token
+
+Version 8 - Dave Budd 2 Dec 2014
+=================================
+IN018930 - CampaignMembership outcome made mandatory
+
+Version 7 - Dave Budd 2 Dec 2014
+=================================
+IN018880 - GAD Type mandatory on DD
+IN018881 - To Be Gift Aided mandatory for Donation and DD
+IN018882 - Address Line 1 minLength = 2
+
+Version 6 - Dave Budd 26 Nov 2014
+=================================
+Removed Fulfilment Note from Registration
+
+Version 5 - Dave Budd 24 Nov 2014
+=================================
+start and end date within profiling info set to date type
+
+Version 4 - Dave Budd 20 Nov 2014
+=================================
+R18 XSD validation requirements applied
+
+Version 3 - Dave Budd 20 Nov 2014
+=================================
+New Entities fro R18 were missing definitions for fields being mandatory
+
+Version 2 - Dave Budd 17 Nov 2014
+=================================
+Added accountName on Standing Order
+Added Batch "wrapper" entity to handle multiple transactions
+
+Version 1 - Initial
+===================
+Initial release for R18 Development
+
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.cancerresearchuk.org/di/r17/supplier/generic" xmlns:com="http://www.cancerresearchuk.org/di/r17/commonTypes" targetNamespace="http://www.cancerresearchuk.org/di/r17/supplier/generic" elementFormDefault="qualified">
+	<import namespace="http://www.cancerresearchuk.org/di/r17/commonTypes" schemaLocation="commonTypesDI.xsd"/>
+	<complexType name="Supporter">
+		<sequence>
+			<element name="dateOfBirth" type="date" minOccurs="0"/>
+			<element name="primaryExternalReferenceId" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="secondaryExternalReferenceId" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="primaryDataSourceCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="secondaryDataSourceCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="forename" nillable="false">
+				<simpleType>
+					<restriction base="com:PartyNamePerson">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="gender" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="initial" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+						<pattern value="[a-zA-Z ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="dateTime" nillable="false"/>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusDate" type="date" nillable="false"/>
+			<element name="suffix" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="15"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="supporterURN" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="surname" nillable="false">
+				<simpleType>
+					<restriction base="com:PartyNamePerson">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="title" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+						<pattern value="[a-zA-Z ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="changeofNameIndicator" type="com:YNFlag" minOccurs="0"/>
+			<element name="nonTaxPayerFlag" type="com:YNFlag" minOccurs="0"/>
+			<element name="nonTaxPayerStartDate" type="date" minOccurs="0"/>
+			<element name="dateOfDeath" type="date" minOccurs="0"/>
+			<element name="deathNotificationDate" type="date" minOccurs="0"/>
+			<element name="maritalStatus" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="address" type="tns:Address" nillable="false"/>
+			<element name="secondaryAddresses" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="address" type="tns:Address" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="contactInfo-Phone" type="tns:ContactInfo-Phone" minOccurs="0"/>
+			<element name="contactInfo-Email" type="tns:ContactInfo-Email" minOccurs="0"/>
+			<element name="contactInfo-Mobile" type="tns:ContactInfo-Mobile" minOccurs="0"/>
+			<element name="giftAidDeclaration" type="tns:GiftAidDeclaration" minOccurs="0"/>
+			<element name="directDebit" type="tns:DirectDebit" minOccurs="0"/>
+			<element name="listOfDonations" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="donations" type="tns:Donations" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfSuppressionsPreferences" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="suppressionsPreferences" type="tns:SuppressionsPreferences" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfCampaignMembership" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="campaignMembership" type="tns:CampaignMembership" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfMailingActivities" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="mailingActivities" type="tns:MailingActivities" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfEventRegistration" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="eventRegistration" type="tns:EventRegistration" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="standingOrders" type="tns:StandingOrders" minOccurs="0"/>
+			<element name="listOfProfilingInfo" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="profilingInfo" type="tns:ProfilingInfo" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfOpportunity" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="opportunity" type="tns:Opportunity" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Batch">
+		<sequence>
+			<element name="id" type="integer" minOccurs="0"/>
+			<element name="listOfTransaction" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="transaction" type="tns:Transaction" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Transaction">
+		<sequence>
+			<element name="reference" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="supporter" type="tns:Supporter" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="Address">
+		<sequence>
+			<element name="addressLine1" nillable="false">
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<minLength value="2"/>
+						<maxLength value="200"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="addressLine2" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="addressLine3" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="addressLine4" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="cherishedAddressHouseName" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+						<pattern value="[a-zA-Z0-9\-/\.&apos;, ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="city" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+						<pattern value="[a-zA-Z\-/\.&apos; ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="country" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+						<pattern value="[a-zA-Z\- ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="county" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+						<pattern value="[a-zA-Z\- ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="postalCode" minOccurs="0">
+				<annotation>
+					<documentation>Drives postcode anywhere lookup.  Can be freetext</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<pattern value="[a-zA-Z0-9 ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" nillable="false"/>
+			<element name="validationStatus" nillable="false">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="newAddressIndicator" type="com:YNFlag" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Phone">
+		<sequence>
+			<element name="phoneNumber" minOccurs="0">
+				<simpleType>
+					<restriction base="com:Landline">
+						<maxLength value="16"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Email">
+		<sequence>
+			<element name="emailAddress" minOccurs="0">
+				<simpleType>
+					<restriction base="com:EmailAddress">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Mobile">
+		<sequence>
+			<element name="mobileNumber" minOccurs="0">
+				<simpleType>
+					<restriction base="com:Mobile">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Donations">
+		<sequence>
+			<element name="amount" nillable="false">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountCode-CRUK" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dataSource" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dateReceived" type="date" nillable="false"/>
+			<element name="donationType" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="eventCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="financialPaymentReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+						<pattern value="[a-zA-Z0-9/-]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="letterCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="resCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentMethod" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentStatus" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="personalGiftAid" nillable="false">
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="reasonNotGiftAid" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="product" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="webPageId" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="255"/>
+						<pattern value="[a-zA-Z0-9\-]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="originatorPaymentID" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="toBeGiftAided" nillable="false">
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="letterCodeGAD" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="methodGAD" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivation" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="inMemoryName" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="celebrantDataSource" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="celebrantExternalReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentProviderTransactionId" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="gadType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="excludefromAgresso" type="com:YNFlag" minOccurs="0"/>
+		</sequence>
+	</complexType>
+	<complexType name="GiftAidDeclaration">
+		<sequence>
+			<element name="confirmedOn" type="date" minOccurs="0"/>
+			<element name="declarationDate" type="date" nillable="false"/>
+			<element name="letterCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="method" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reference" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" nillable="false"/>
+			<element name="gadType" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="DirectDebit">
+		<sequence>
+			<element name="accountName" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="amount" nillable="false">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountNumber" nillable="false">
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<minLength value="8"/>
+						<maxLength value="10"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankSortCode" nillable="false">
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<length value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountCode-CRUK" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="frequency" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="product" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reference" nillable="false">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="resCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dataSource" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentDay" nillable="false">
+				<simpleType>
+					<restriction base="integer">
+						<enumeration value="5"/>
+						<enumeration value="19"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" minOccurs="0"/>
+			<element name="toBeGiftAided" nillable="false">
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="letterCodeGAD" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="methodGAD" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivation" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="inMemoryName" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="gadType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SuppressionsPreferences">
+		<sequence>
+			<element name="endDate" type="date" minOccurs="0"/>
+			<element name="startDate" type="date" nillable="false"/>
+			<element name="suppressionPreferenceCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="CampaignMembership">
+		<sequence>
+			<element name="campaignCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="contactedOn" type="date" nillable="false"/>
+			<element name="outcome" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="versionCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="campaignRecipientToken" nillable="false">
+				<simpleType>
+					<restriction base="decimal">
+						<fractionDigits value="7"/>
+						<totalDigits value="22"/>
+						<maxExclusive value="1000000000000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MailingActivities">
+		<sequence>
+			<element name="category" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="endDate" type="dateTime" nillable="false"/>
+			<element name="letterCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="originatorActivityID" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="EventRegistration">
+		<sequence>
+			<element name="eventCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="registrationNumber" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="entryType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="entryFeeStatus" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="cancerType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="fundraisingPageId" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<maxLength value="500"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="fundraisingPageType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="fundraisingPageUrl" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="500"/>
+						<pattern value="[a-zA-Z0-9/\.:]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="howHeardAbout" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="inviteSource" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivation" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="participationType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="placeType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="pledgeAmount" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="registered" type="date" nillable="false"/>
+			<element name="registrationStatus" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="supporterRegistrationType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="survivorshipActivities" minOccurs="0">
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="runningNumber" minOccurs="0">
+				<simpleType>
+					<restriction base="integer">
+						<minExclusive value="0"/>
+						<totalDigits value="10"/>
+						<maxExclusive value="10000000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="groupName" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="groupRole" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="emergencyContactName" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="emergencyContactNumber" minOccurs="0">
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<maxLength value="15"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="channel" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="listOfRegistrationPack" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="registrationPack" type="tns:RegistrationPack" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="RegistrationPack">
+		<sequence>
+			<element name="merchandiseProductCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="quantity" minOccurs="0">
+				<simpleType>
+					<restriction base="integer">
+						<minExclusive value="0"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="StandingOrders">
+		<sequence>
+			<element name="amount" nillable="false">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="accountName" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountNumber" nillable="false">
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<minLength value="8"/>
+						<maxLength value="10"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankSortCode" nillable="false">
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<length value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="crukBankAccountCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="frequency" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reference" nillable="false">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="ProfilingInfo">
+		<sequence>
+			<element name="codeLevel1" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="codeLevel2" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="comments" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="250"/>
+						<pattern value="[a-zA-Z0-9\-\.&apos;, ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" nillable="false"/>
+			<element name="endDate" type="date" minOccurs="0"/>
+			<element name="siebelAttribute1" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="siebelAttribute6" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Opportunity">
+		<sequence>
+			<element name="dataSource" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		<choice>
+			<element name="crukReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="externalReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</choice>
+			<element name="department" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="journey" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="stage" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" nillable="false"/>
+			<element name="description" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="255"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="likelihood" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="currency" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="status" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="endDate" type="date" minOccurs="0"/>
+			<element name="reasonForClosure" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="closureSummary" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="250"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="listOfOpportunityProduct" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="opportunityProduct" type="tns:OpportunityProduct" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfOpportunityActivities" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="opportunityActivities" type="tns:OpportunityActivities" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="OpportunityProduct">
+		<sequence>
+		<choice>
+			<element name="crukReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="externalReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</choice>
+			<element name="dataSource" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="productCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="targetAmount" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="askAmount" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="askDate" type="date" minOccurs="0"/>
+			<element name="percentage" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+						<fractionDigits value="2"/>
+						<totalDigits value="5"/>
+						<maxExclusive value="1000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="agreedAmount" minOccurs="0">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="expectedDate" type="date" minOccurs="0"/>
+			<element name="notes" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="250"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="resCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivation" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="inMemoryName" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="OpportunityActivities">
+		<sequence>
+		<choice> 
+			<element name="crukReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="externalReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</choice>	
+			<element name="dataSource" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="type" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="subType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="category" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="subCategory" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="description" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="250"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="comments" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="1500"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="completedDate" type="dateTime" minOccurs="0"/>
+			<element name="status" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="dateTime" nillable="false"/>
+			<element name="endDate" type="dateTime" minOccurs="0"/>
+			<element name="source" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="batch" type="tns:Batch"/>
+</schema>
