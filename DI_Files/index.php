@@ -29,8 +29,11 @@ input:hover {
 <header>
 <body>
 <div id="bar">
-<form method="post" action="../../DI_Files/GenericXMLtemp.php">
+<form method="post" action="../../DI_Files/GenericXML.php">
    <input type="submit" value="Generate XML Files">
+</form>
+<form action="demo_form.asp" method="post" >
+   <input type="submit" value="Generate From Excel">
 </form>
 <form action="demo_form.asp" method="post" >
    <input type="submit" value="Results">

@@ -13,7 +13,7 @@ $xml->formatOutput =true;
 #$root = $xml->createElementNS('http://www.cancerresearchuk.org/di/r17/supplier/newdonate');
 $gen=$xml->createElementNS("http://www.cancerresearchuk.org/di/r17/supplier/generic","batch");
 $xml->appendChild($gen);
-$id=$xml->createElement("id","test");
+$id=$xml->createElement("id",date('YmdHis'));
 $gen->appendChild($id);
 $ltran=$xml->createElement("listOfTransaction");
 $gen->appendChild($ltran);
