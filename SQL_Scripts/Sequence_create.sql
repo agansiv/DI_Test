@@ -1,95 +1,60 @@
----table creation 
 
-CREATE TABLE DI_REF_DATA 
-(
-  ENTITY VARCHAR2(100 BYTE) 
-, FIELD VARCHAR2(100 BYTE) 
-, VALUE VARCHAR2(100 BYTE) 
-) ;
+create table DI_REF_DATA (Entity varchar2(100),Field varchar2(100),VALUE VARCHAR2(100));
 
 
-  CREATE TABLE DI_REF_ENTITY
-   (	"TEST_ID" VARCHAR2(100 BYTE), 
-	"PRIEXTREFID" VARCHAR2(100 BYTE), 
-	"PRIDATASOURCE" VARCHAR2(100 BYTE), 
-	"FORENAME" VARCHAR2(100 BYTE), 
-	"STARTDATE" VARCHAR2(100 BYTE), 
-	"SOURCE" VARCHAR2(100 BYTE), 
-	"STATUS" VARCHAR2(100 BYTE), 
-	"STATUSDATE" VARCHAR2(100 BYTE), 
-	"SURNAME" VARCHAR2(100 BYTE), 
-	"TITLE" VARCHAR2(100 BYTE), 
-	"ADDRESSLINE1" VARCHAR2(100 BYTE), 
-	"CITY" VARCHAR2(100 BYTE), 
-	"COUNTRY" VARCHAR2(100 BYTE), 
-	"POSTALCODE" VARCHAR2(100 BYTE), 
-	"ADDR_STARTDATE" VARCHAR2(100 BYTE), 
-	"VALIDATIONSTATUS" VARCHAR2(100 BYTE)
-   ) SEGMENT CREATION IMMEDIATE 
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
- NOCOMPRESS LOGGING
-  STORAGE(INITIAL 5242880 NEXT 5242880 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "BKP_TBS" ;
-  
-  
-  CREATE TABLE "PALAGI01"."DI_REF_TEST_AUTOMATE" 
-   (	"TEST_ID" VARCHAR2(20 BYTE), 
-	"ENTITY" VARCHAR2(100 BYTE), 
-	"FIELD" VARCHAR2(100 BYTE), 
-	"TYPE" VARCHAR2(100 BYTE), 
-	"SUPPLIER" VARCHAR2(100 BYTE)
-   ) SEGMENT CREATION IMMEDIATE 
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
- NOCOMPRESS LOGGING
-  STORAGE(INITIAL 5242880 NEXT 5242880 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "BKP_TBS" ;
-
-  CREATE OR REPLACE TRIGGER "PALAGI01"."ENTITY_INSERT" 
-before INSERT
-   ON DI_REF_TEST_AUTOMATE
-   FOR EACH ROW
-DECLARE
- v_field varchar2(100);
- v_test_id varchar2(100);
- v_str varchar2(500);
- v_coun integer := 0;
-BEGIN
-  select :new.Field,:new.TEST_ID into v_field,v_test_id from dual;
-  select count(*) into v_coun from DI_REF_ENTITY where test_id=v_test_id;
-  if v_coun>0 then
-  v_str := 'update DI_REF_ENTITY set '||v_field||' = ''Y'' where test_id='''||v_test_id||'''';
-  else
-  v_str := 'INSERT INTO DI_REF_ENTITY(Test_ID,'||v_field||') values ('||v_test_id||',''Y'')';
-  end if;
-  execute immediate (v_str);
-  --insert into temp values (v_str);
-END;
-/
-ALTER TRIGGER "PALAGI01"."ENTITY_INSERT" ENABLE;
+create table DI_REF_TEST_AUTOMATE (TEST_ID varchar2(20),Entity varchar2(100),Field varchar2(100),Type varchar2(100),SUPPLIER varchar2(100));
 
 
 
-create or replace FUNCTION generate (str_type VARCHAR2,vfield varchar2)
-RETURN VARCHAR2 IS
-retval VARCHAR2(2000);
-Begin
- if str_type= 'Alpa' then
- select dbms_random.string('L', 15) into retval from dual;
- elsif str_type= 'Numeric' then
-  select round(dbms_random.value(1,90000000000)) into retval from DI_REF_DATA where field = vfield;
- elsif str_type= 'AlphaNumeric' then
-  select dbms_random.string('U', 5)||round(dbms_random.value(1,90000000000)) into retval from dual;
-  elsif str_type= 'Static' then
-  select value into retval from DI_REF_DATA where field = vfield;
-  end if;
-  return retval;
-  END;
-  /
-
+create table DI_REF_ENTITY (
+Test_ID varchar2(100),
+SUPP_dateOfBirth VARCHAR2(100),
+SUPP_primaryExternalRefId VARCHAR2(100),
+SUPP_secondaryExternalRefId VARCHAR2(100),
+SUPP_primaryDataSourceCode VARCHAR2(100),
+SUPP_secondaryDataSourceCode VARCHAR2(100),
+SUPP_forename VARCHAR2(100),
+SUPP_gender VARCHAR2(100),
+SUPP_initial VARCHAR2(100),
+SUPP_startDate VARCHAR2(100),
+SUPP_source VARCHAR2(100),
+SUPP_statusCode VARCHAR2(100),
+SUPP_statusDate VARCHAR2(100),
+SUPP_suffix VARCHAR2(100),
+SUPP_supporterURN VARCHAR2(100),
+SUPP_surname VARCHAR2(100),
+SUPP_title VARCHAR2(100),
+SUPP_changeofNameIndicator VARCHAR2(100),
+SUPP_nonTaxPayerFlag VARCHAR2(100),
+SUPP_nonTaxPayerStartDate VARCHAR2(100),
+SUPP_dateOfDeath VARCHAR2(100),
+SUPP_deathNotificationDate VARCHAR2(100),
+SUPP_maritalStatus VARCHAR2(100),
+ADDR_addressLine1 VARCHAR2(100),
+ADDR_addressLine2 VARCHAR2(100),
+ADDR_addressLine3 VARCHAR2(100),
+ADDR_addressLine4 VARCHAR2(100),
+ADDR_cherishedAddressHN VARCHAR2(100),
+ADDR_city VARCHAR2(100),
+ADDR_country VARCHAR2(100),
+ADDR_county VARCHAR2(100),
+ADDR_postalCode VARCHAR2(100),
+ADDR_startDate VARCHAR2(100),
+ADDR_validationStatus VARCHAR2(100),
+ADDR_newAddressIndicator VARCHAR2(100),
+SEC_ADDR_addressLine1 VARCHAR2(100),
+SEC_ADDR_addressLine2 VARCHAR2(100),
+SEC_ADDR_addressLine3 VARCHAR2(100),
+SEC_ADDR_addressLine4 VARCHAR2(100),
+SEC_ADDR_cherishedAddressHN VARCHAR2(100),
+SEC_ADDR_city VARCHAR2(100),
+SEC_ADDR_country VARCHAR2(100),
+SEC_ADDR_county VARCHAR2(100),
+SEC_ADDR_postalCode VARCHAR2(100),
+SEC_ADDR_startDate VARCHAR2(100),
+SEC_ADDR_validationStatus VARCHAR2(100),
+SEC_ADDR_newAddressIndicator VARCHAR2(100)
+);
 
 
 create OR REPLACE FORCE VIEW  DI_test_records_V as
@@ -142,33 +107,4 @@ generate(case when SEC_ADDR_validationStatus ='Y' then (select type from DI_REF_
 generate(case when SEC_ADDR_newAddressIndicator ='Y' then (select type from DI_REF_TEST_AUTOMATE au where au.test_id=e.test_id and field='SEC_ADDR_newAddressIndicator' ) else '' end,'SEC_ADDR_newAddressIndicator' ) SEC_ADDR_newAddressIndicator 
 from DI_REF_ENTITY e;
 
-
-
-
-  CREATE TABLE "PALAGI01"."DI_TEST_RECORDS" 
-   (	"TEST_ID" VARCHAR2(100 BYTE), 
-	"PRIEXTREFID" VARCHAR2(4000 BYTE), 
-	"PRIDATASOURCE" VARCHAR2(4000 BYTE), 
-	"FORENAME" VARCHAR2(4000 BYTE), 
-	"STARTDATE" VARCHAR2(4000 BYTE), 
-	"SOURCE" VARCHAR2(4000 BYTE), 
-	"STATUS" VARCHAR2(4000 BYTE), 
-	"STATUSDATE" VARCHAR2(4000 BYTE), 
-	"SURNAME" VARCHAR2(4000 BYTE), 
-	"TITLE" VARCHAR2(4000 BYTE), 
-	"ADDRESSLINE1" VARCHAR2(4000 BYTE), 
-	"CITY" VARCHAR2(4000 BYTE), 
-	"COUNTRY" VARCHAR2(4000 BYTE), 
-	"POSTALCODE" VARCHAR2(4000 BYTE), 
-	"ADDR_STARTDATE" VARCHAR2(4000 BYTE), 
-	"VALIDATIONSTATUS" VARCHAR2(4000 BYTE)
-   ) SEGMENT CREATION IMMEDIATE 
-  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
- NOCOMPRESS LOGGING
-  STORAGE(INITIAL 5242880 NEXT 5242880 MINEXTENTS 1 MAXEXTENTS 2147483645
-  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
-  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
-  TABLESPACE "BKP_TBS" ;
-
-commit;
 

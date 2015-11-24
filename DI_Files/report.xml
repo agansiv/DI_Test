@@ -3,10 +3,10 @@
   <id>testval</id>
   <listOfTransaction>
     <transaction>
-      <reference>testval</reference>
+      <reference>1</reference>
       <supporter>
-        <dateOfBirth>testval</dateOfBirth>
-        <primaryExternalReferenceId>testval</primaryExternalReferenceId>
+        <dateOfBirth>2015-01-17</dateOfBirth>
+        <primaryExternalReferenceId>DIERU22392494833</primaryExternalReferenceId>
         <primaryDataSourceCode>testval</primaryDataSourceCode>
         <forename>testval</forename>
         <startDate>testval</startDate>
@@ -20,6 +20,7 @@
         <nonTaxPayerStartDate>testval</nonTaxPayerStartDate>
         <dateOfDeath>testval</dateOfDeath>
         <deathNotificationDate>testval</deathNotificationDate>
+        <maritalStatus>testval</maritalStatus>
         <address>
           <addressLine1>testval</addressLine1>
           <addressLine2>testval</addressLine2>

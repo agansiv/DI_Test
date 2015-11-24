@@ -4,7 +4,7 @@ include 'db_connect.php';
 $connect = odbc_connect("SIT", "palagi01", "s1mple01");
 # query the users table for name and surname
 $sqlop = new db_connect();
-$result = $sqlop->db('SELECT  * FROM DI_test_records where rownum<2');
+$result = $sqlop->db('SELECT  * FROM DI_test_records_V where rownum<2');
 # perform the query
 #$result = odbc_exec($connect, $query);
 
@@ -19,14 +19,14 @@ $ltran=$xml->createElement("listOfTransaction");
 $gen->appendChild($ltran);
 $tran=$xml->createElement("transaction");
 $ltran->appendChild($tran);
-$Trefe=$xml->createElement("reference","testval");
-$tran->appendChild($Trefe);
-$supporter=$xml->createElement("supporter");
-$tran->appendChild($supporter);
 while($row=odbc_fetch_row($result)){
-	$dob = $xml->createElement("dateOfBirth",odbc_result($result, 1));
+	$Trefe=$xml->createElement("reference",odbc_result($result, 1));
+	$tran->appendChild($Trefe);
+	$supporter=$xml->createElement("supporter");
+	$tran->appendChild($supporter);
+	$dob = $xml->createElement("dateOfBirth",odbc_result($result, 2));
 	$supporter->appendChild($dob);
-	$pExtRef = $xml->createElement("primaryExternalReferenceId","testval");
+	$pExtRef = $xml->createElement("primaryExternalReferenceId",odbc_result($result, 3));
 	$supporter->appendChild($pExtRef);
 	$PDataSo = $xml->createElement("primaryDataSourceCode","testval");
 	$supporter->appendChild($PDataSo);

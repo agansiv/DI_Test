@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<batch xmlns="http://www.cancerresearchuk.org/di/r17/supplier/generic">
+	<id>0</id>
+	<listOfTransaction>
+		<transaction>
+			<reference>DI_XML_AUTOMATION</reference>
+			<supporter>
+				<dateOfBirth>1965-04-13</dateOfBirth>
+				<primaryExternalReferenceId>DI_AUTO</primaryExternalReferenceId>
+				<primaryDataSourceCode>WEB</primaryDataSourceCode>
+				<forename>diSusan</forename>
+				<gender>Female</gender>
+				<initial>S</initial>
+				<startDate>2014-12-07T00:00:00</startDate>
+				<source>N14RGE</source>
+				<statusCode>Live</statusCode>
+				<statusDate>2014-12-07</statusDate>
+				<suffix>Jr</suffix>
+				<surname>diAdams</surname>
+				<title>ms</title>
+				<nonTaxPayerFlag>Y</nonTaxPayerFlag>
+				<nonTaxPayerStartDate>2000-12-08</nonTaxPayerStartDate>
+				<maritalStatus>Married</maritalStatus>
+				<address>
+					<addressLine1>diBrambles</addressLine1>
+					<addressLine2>diWyatts Lane</addressLine2>
+					<addressLine3>digodolphin cross</addressLine3>
+					<city>HAYWARDS HEATH</city>
+					<country>United Kingdom</country>
+					<postalCode>RH17 7AH</postalCode>
+					<startDate>2014-02-12</startDate>
+					<validationStatus>NV</validationStatus>
+					<newAddressIndicator>N</newAddressIndicator>
+				</address>
+			</supporter>
+		</transaction>
+	</listOfTransaction>
+</batch>

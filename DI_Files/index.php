@@ -29,7 +29,7 @@ input:hover {
 <header>
 <body>
 <div id="bar">
-<form method="post" action="../../DI_Files/GenericXML.php">
+<form method="post" action="../../DI_Files/GenericXMLtemp.php">
    <input type="submit" value="Generate XML Files">
 </form>
 <form action="demo_form.asp" method="post" >
