@@ -25,7 +25,7 @@ $gen->appendChild($ltran);
 $tran=$xml->createElement("transaction");
 $ltran->appendChild($tran);
 while($row=odbc_fetch_row($result)){
-	$Trefe=$xml->createElement("reference",odbc_result($result, 1));
+	$Trefe=$xml->createElement("reference",odbc_result($result, "SUPP_DATEOFBIRTH"));
 	$tran->appendChild($Trefe);
 	$supporter=$xml->createElement("supporter");
 	$tran->appendChild($supporter);

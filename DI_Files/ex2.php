@@ -1,30 +1,17 @@
 <?php
-include '../DI_Files/IOFactory.php';
-include '../DI_Files/Autoloader.php';
+$excelFile = realpath('C:/xampp/htdocs/DI_Files/test.xlsx');
+ $connect = new PDO("odbc:Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)};Dbq=$excelFile", "", "");
+$query = "select * from [Sheet1$]";
+    $sql = $connect->prepare($query);
+    $row = $sql->execute();
 
-$inputFileName = 'C:/xampp/htdocs/DI_Files/Test.xlsx';
-
-//  Read your Excel workbook
-try {
-    $inputFileType = PHPExcel_IOFactory::identify($inputFileName);
-    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-    $objPHPExcel = $objReader->load($inputFileName);
-} catch (Exception $e) {
-    die('Error loading file "' . pathinfo($inputFileName, PATHINFO_BASENAME) 
-    . '": ' . $e->getMessage());
+//while ($row = $sql->fetch(PDO::FETCH_NUM))  {
+	while ($row = $sql->fetchAll(PDO::FETCH_COLUMN))  {
+	
+	//fetchAll(PDO::FETCH_COLUMN);
+    echo  $row[0];
+    //$con = $row[2];
+	//echo $id ;
 }
-
-//  Get worksheet dimensions
-$sheet = $objPHPExcel->getSheet(0);
-$highestRow = $sheet->getHighestRow();
-$highestColumn = $sheet->getHighestColumn();
-
-//  Loop through each row of the worksheet in turn
-for ($row = 1; $row <= $highestRow; $row++) {
-    //  Read a row of data into an array
-    $rowData = $sheet->rangeToArray('A' . $row . ':' . $highestColumn . $row, 
-    NULL, TRUE, FALSE);
-    foreach($rowData[0] as $k=>$v)
-        echo "Row: ".$row."- Col: ".($k+1)." = ".$v."<br />";
-}
+	
 ?>
