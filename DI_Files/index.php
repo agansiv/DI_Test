@@ -38,6 +38,12 @@ input:hover {
 <form action="demo_form.asp" method="post" >
    <input type="submit" value="Results">
 </form>
+<form method="post" action="../../DI_Files/Table.php">
+   <input type="submit" value="Table">
+</form>
+<form method="post" action="../../DI_Files/Table.php">
+   <input type="submit" value="Canonical">
+</form>
 </div>
 
 </body>
