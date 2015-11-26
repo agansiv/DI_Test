@@ -108,3 +108,5 @@ generate(case when SEC_ADDR_newAddressIndicator ='Y' then (select type from DI_R
 from DI_REF_ENTITY e;
 
 
+
+create table DI_TEST_RECORDS as select * from DI_TEST_RECORDS_V where rownum<1;

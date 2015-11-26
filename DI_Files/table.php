@@ -13,7 +13,7 @@ echo '
 
 </style>';
 echo '<html>
-      <div style="margin:20px; margin-left:3%;border:1px solid red;">
+      <div style="margin:20px; margin-left:3%;">
 	  <table border="1"  >
 	 <tr>';
  for($i = 1;$i <= odbc_num_fields($result);$i++)
