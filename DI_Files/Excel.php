@@ -4,14 +4,14 @@ include 'db_connect.php';
  ?>
 <html>
 <style>
-input.excelloads {
+input.excelload {
   border-radius: 10px;
   padding:10px;
   border: 1px solid #999;
   color: #FFFFFF;
   background-color: #3399FF;
 }
-input.excelloadss {
+input.excelloads {
   border-radius: 12px;
   padding:10px;
   border: 1px solid #999;
@@ -29,17 +29,16 @@ select {
 a {
     display: inline-block; 
 }
-::-ms-browse {
-    font-weight: bold;
+input.excelloads::-ms-browse {
     background-color: #3399FF;
-    border-radius: 12px;
+    border-radius: 10px;
 	height:38px;
 	color: #FFFFFF;
+	margin-left:3%;
 }
  
 input.excelloads::-ms-value {
-    border-radius: .5em 0 0 .5em;
-	 display :none;
+    display :none;
 }
 </style>
 <body>
@@ -59,7 +58,7 @@ input.excelloads::-ms-value {
 	<option value="LSD">LSD</option>
 	<option value="Woods">Woods</option>
 </select>
-<input class = "excelloads" type="file" id="A1" style ="::-ms-value" >
+<input class = "excelloads" type="file" id="A1" >
 <input class = "excelload" type="submit" style="float: right;" value = "Submit">
 </form>
 </div>
