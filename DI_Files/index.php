@@ -8,14 +8,14 @@ h1 {
 form {
 	display: inline;
 }
-input {
+input.err {
   border-radius: 10px;
   padding:10px;
   border: 1px solid #999;
   color: #FFFFFF;
   background-color: #3399FF;
 }
-input:hover {
+input.err:hover {
 	background-color: #ff3333;
 	font-weight:bold;
 }
@@ -30,19 +30,19 @@ input:hover {
 <body>
 <div id="bar">
 <form method="post" action="../../DI_Files/GenericXML.php">
-   <input type="submit" value="Generate XML Files">
+   <input class="err" type="submit" value="Generate XML Files">
 </form>
 <form method="post" action="../../DI_Files/Excel.php">
-   <input type="submit" value="Generate From Excel">
+   <input class="err" type="submit" value="Generate From Excel">
 </form>
 <form action="demo_form.asp" method="post" >
-   <input type="submit" value="Results">
+   <input class="err" type="submit" value="Results">
 </form>
 <form method="post" action="../../DI_Files/Table.php">
-   <input type="submit" value="Table">
+   <input class="err" type="submit" value="Table">
 </form>
-<form method="post" action="../../DI_Files/Table.php">
-   <input type="submit" value="Canonical">
+<form method="post" action="../../DI_Files/temp.php">
+   <input class="err" type="submit" value="Canonical_temp">
 </form>
 </div>
 

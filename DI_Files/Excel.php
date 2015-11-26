@@ -1,75 +1,67 @@
-<?php
+<?php 
 include 'index.php';
 include 'db_connect.php';
-?>
+ ?>
 <html>
 <style>
-a{font-weight: bold;margin: 20px }
-#barfile { background-color:#D0D0D0;border-radius: 10px;width: 550px; margin: 20px auto;height:38px;}
-/* do not group these rules */
-*::-webkit-input-placeholder {
-    color: White;
+input.excelloads {
+  border-radius: 10px;
+  padding:10px;
+  border: 1px solid #999;
+  color: #FFFFFF;
+  background-color: #3399FF;
 }
-*:-moz-placeholder {
-    /* FF 4-18 */
-    color: White;
+input.excelloadss {
+  border-radius: 12px;
+  padding:10px;
+  border: 1px solid #999;
+  color: #FFFFFF;
+  background-color: #3399FF;
+  height:38px;
+  margin-left:3%;
 }
-*::-moz-placeholder {
-    /* FF 19+ */
-    color: White;
+select {
+  border-radius: 10px;
+  padding:10px;
+  border: 1px solid #999;
+  margin: 0px auto;
 }
-*:-ms-input-placeholder {
-    /* IE 10+ */
-    color: White;
+a {
+    display: inline-block; 
+}
+::-ms-browse {
+    font-weight: bold;
+    background-color: #3399FF;
+    border-radius: 12px;
+	height:38px;
+	color: #FFFFFF;
+}
+ 
+input.excelloads::-ms-value {
+    border-radius: .5em 0 0 .5em;
+	 display :none;
 }
 </style>
 <body>
-<div id="barfile">
-<form method="GET">
-<input type='text' name="Envi" list='listid' align="right" style="margin: 0px " placeholder="Select Environment..." Style= "color: red" >
-    <datalist id='listid' >
-       <option  value='value1'>
-       <option  value='value2'>
-    </datalist>
-</form>
-<input type='text' list='listid1' align="right" placeholder="Select Supplier...">
-    <datalist id='listid1'>
-       <option  value='value1'>
-       <option  value='value2'>
-    </datalist>
-<select>
-    <option value="" disabled selected>Select your option</option>
-    <option value="hurr">Durr</option>
+<div id="barexcel" style ="border-radius: 10px;width: 816px; margin: 20px auto;height:38px;">
+<form action="temp1.php" method="post" id="carform">
+<select required name="Envi" form ="carform" >
+    <option value="" disabled selected>Select Environment ...</option>
+    <option value="SIT">SIT</option>
+	<option value="FTE">FTE</option>
+	<option value="Perf">Performance</option>
+	<option value="REH">Rehearsal</option>
 </select>
-<?php
-echo '
-<form method="GET">
-  <select name="state"> 
-    <option value="0"></option> 
-    <option value="1">ok</option> 
-    <option value="2">not-ok</option> 
-  </select> 
-</form> ';
-echo $_GET['state'];
-?>
-<form method="post" enctype="multipart/form-data">
-<a href="#" onclick="document.getElementById('A1').click(); return false; " />Pick the File </a>
-<input type="file" id="A1" style ="visibility: hidden">
+<select required name="Supplier" form ="carform" style ="margin-left:3%" >
+    <option value="" disabled selected>Select Suppliers...</option>
+    <option value="Generic">Generic</option>
+	<option value="New Donate">New Donate</option>
+	<option value="LSD">LSD</option>
+	<option value="Woods">Woods</option>
+</select>
+<input class = "excelloads" type="file" id="A1" style ="::-ms-value" >
+<input class = "excelload" type="submit" style="float: right;" value = "Submit">
 </form>
 </div>
 </body>
 </html>
-
-
-<?php
-//include 'index.php';
-//include 'db_connect.php';
-//$connect = odbc_connect ("Load", "", "");Works in case required
-$excelFile = realpath('C:\xampp\htdocs\DI_Files\test.xls');
-$excelDir = dirname($excelFile);
-$connect = odbc_connect("Driver={Microsoft Excel Driver (*.xls)};DriverId=790;Dbq=$excelFile;DefaultDir=$excelDir" , '', ''); 
-$result = odbc_exec ($connect, "select * from [Sheet1$]");
-while($row=odbc_fetch_row($result)){
-	echo odbc_result($result, "one")." ".odbc_result($result, "two").nl2br("\r\n");
- } 
-?>
