@@ -8,41 +8,70 @@ input.excelload {
   border-radius: 10px;
   padding:10px;
   border: 1px solid #999;
-  color: #FFFFFF;
   background-color: #3399FF;
+  height:44px;
+  
 }
 input.excelloads {
-  border-radius: 12px;
+  border-radius: 10px;
   padding:10px;
-  border: 1px solid #999;
-  color: #FFFFFF;
-  background-color: #3399FF;
-  height:38px;
-  margin-left:3%;
+  background-color: #FFFFFF;
+  height:43px;
+  margin-left:2%;
+ 
 }
 select {
   border-radius: 10px;
   padding:10px;
   border: 1px solid #999;
-  margin: 0px auto;
-}
-a {
-    display: inline-block; 
+  margin: 0px ;
+  height:43px;
 }
 input.excelloads::-ms-browse {
     background-color: #3399FF;
     border-radius: 10px;
-	height:38px;
+	border: 1px solid #999;
+ 	height:37px;
+	width: 100px
 	color: #FFFFFF;
-	margin-left:3%;
+	overflow: hidden;
+	
 }
  
 input.excelloads::-ms-value {
-    display :none;
+    border-radius: 10px;
+	height:37px;
+	width: 0px
+	color: #FFFFFF;
+	border: 1px solid #999;
+	background-color: #FFFFFF;
+	overflow: hidden;
+ 
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+ input.excelloads {
+  border-radius: 10px;
+  padding:10px;
+  background-color: #3399FF;
+  height:43px;
+  margin-left:3%"
+  color: #000000;  
+}
+}
+@-moz-document url-prefix() {
+   input.excelloads {
+  border-radius: 10px;
+  padding:0px;
+  background-color: #3399FF;
+  height:43px;
+  margin-left:3%";
+  color: #000000; 
+}
+
 }
 </style>
 <body>
-<div id="barexcel" style ="border-radius: 10px;width: 816px; margin: 20px auto;height:38px;">
+<div id="barexcel" style ="border-radius: 10px;width: 816px; margin: 20px auto;height:43px;background-color: #FFFFFF;">
 <form action="temp1.php" method="post" id="carform">
 <select required name="Envi" form ="carform" >
     <option value="" disabled selected>Select Environment ...</option>
@@ -58,8 +87,8 @@ input.excelloads::-ms-value {
 	<option value="LSD">LSD</option>
 	<option value="Woods">Woods</option>
 </select>
-<input class = "excelloads" type="file" id="A1" >
-<input class = "excelload" type="submit" style="float: right;" value = "Submit">
+<input required class = "excelloads" type="file" id="A1" value = "Chooseee" >
+<input class = "excelload" type="submit" style ="margin-left:2%" value = "Submit">
 </form>
 </div>
 </body>
