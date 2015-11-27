@@ -57,6 +57,7 @@ input.excelloads::-ms-value {
   margin-left:3%"
   color: #000000;  
 }
+
 }
 @-moz-document url-prefix() {
    input.excelloads {
@@ -71,23 +72,23 @@ input.excelloads::-ms-value {
 }
 </style>
 <body>
-<div id="barexcel" style ="border-radius: 10px;width: 816px; margin: 20px auto;height:43px;background-color: #FFFFFF;">
-<form action="temp1.php" method="post" id="carform">
-<select required name="Envi" form ="carform" >
+<div id="barexcel" style ="border-radius: 10px;width: 990px; margin: 20px auto;height:43px;background-color: #FFFFFF;">
+<form action="LoadExcel.php" method="post" id="loadform">
+<select required name="Envi" form ="loadform" >
     <option value="" disabled selected>Select Environment ...</option>
     <option value="SIT">SIT</option>
 	<option value="FTE">FTE</option>
 	<option value="Perf">Performance</option>
 	<option value="REH">Rehearsal</option>
 </select>
-<select required name="Supplier" form ="carform" style ="margin-left:3%" >
+<select required name="Supplier" form ="loadform" style ="margin-left:3%" >
     <option value="" disabled selected>Select Suppliers...</option>
     <option value="Generic">Generic</option>
 	<option value="New Donate">New Donate</option>
 	<option value="LSD">LSD</option>
 	<option value="Woods">Woods</option>
 </select>
-<input required class = "excelloads" type="file" id="A1" value = "Chooseee" >
+<input required class = "excelloads" type="file" id="A1" name = "Choose" >
 <input class = "excelload" type="submit" style ="margin-left:2%" value = "Submit">
 </form>
 </div>

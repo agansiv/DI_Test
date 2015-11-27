@@ -6,7 +6,7 @@ include 'Excel.php';
 
 Welcome <?php echo $_POST["Envi"]; ?><br>
 Your email address is: <?php echo $_POST["Supplier"]; ?><br>
-
+Your Path is: <?php echo $_POST["Choose"]; ?>
 </body>
 </html>
 
