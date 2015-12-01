@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <batch xmlns="http://www.cancerresearchuk.org/di/r17/supplier/generic">
-  <id>20151126163936</id>
+  <id>20151201185627</id>
   <listOfTransaction>
     <transaction>
-      <reference>2015-01-17</reference>
+      <reference>20151201185627</reference>
       <supporter>
         <dateOfBirth>2015-01-17</dateOfBirth>
-        <primaryExternalReferenceId>EQCRH38135243015</primaryExternalReferenceId>
-        <secondaryExternalReferenceId>ILMRI80267268037</secondaryExternalReferenceId>
+        <primaryExternalReferenceId>EBBJT69007699605</primaryExternalReferenceId>
+        <secondaryExternalReferenceId>MEHHZ44205440908</secondaryExternalReferenceId>
         <primaryDataSourceCode>JG</primaryDataSourceCode>
         <secondaryDataSourceCode>JG</secondaryDataSourceCode>
-        <forename>tdjvrrywlzexlvh</forename>
+        <forename>gvojenpnfxmjohh</forename>
         <gender>Male</gender>
         <initial>T</initial>
         <startDate>2015-01-17T13:11:20</startDate>
@@ -19,7 +19,7 @@
         <statusDate>2015-01-17T13:11:20</statusDate>
         <suffix>Jr.</suffix>
         <supporterURN/>
-        <surname>kqekudasbgqfvva</surname>
+        <surname>adfzakgbzdtlrrf</surname>
         <title>Mr</title>
         <changeofNameIndicator>Y</changeofNameIndicator>
         <nonTaxPayerFlag>Y</nonTaxPayerFlag>
@@ -58,137 +58,145 @@
           </address>
         </secondaryAddresses>
         <contactInfo-Phone>
-          <phoneNumber>testval</phoneNumber>
+          <phoneNumber>02000000001</phoneNumber>
         </contactInfo-Phone>
         <contactInfo-Email>
-          <emailAddress>testval</emailAddress>
+          <emailAddress>test@test.com</emailAddress>
         </contactInfo-Email>
         <contactInfo-Mobile>
-          <mobileNumber>testval</mobileNumber>
+          <mobileNumber>07000000001</mobileNumber>
         </contactInfo-Mobile>
         <giftAidDeclaration>
-          <confirmedOn>testval</confirmedOn>
-          <declarationDate>testval</declarationDate>
-          <letterCode>testval</letterCode>
-          <method>testval</method>
-          <reference>testval</reference>
-          <source>testval</source>
-          <startDate>testval</startDate>
-          <gadType>testval</gadType>
+          <confirmedOn>2014-12-08</confirmedOn>
+          <declarationDate>2014-12-08</declarationDate>
+          <letterCode>11DDGA</letterCode>
+          <method>Written</method>
+          <reference>QJVDY77187530434</reference>
+          <source>E13DM1001</source>
+          <startDate>2014-12-08</startDate>
+          <gadType>Rolling</gadType>
         </giftAidDeclaration>
         <directDebit>
-          <accountName>testval</accountName>
-          <amount>testval</amount>
-          <bankAccountNumber>testval</bankAccountNumber>
-          <bankSortCode>testval</bankSortCode>
-          <bankAccountCode>testval</bankAccountCode>
-          <frequency>testval</frequency>
-          <product>testval</product>
-          <reference>testval</reference>
-          <resCode>testval</resCode>
-          <source>testval</source>
-          <dataSource>testval</dataSource>
-          <paymentDay>testval</paymentDay>
-          <startDate>testval</startDate>
-          <toBeGiftAided>testval</toBeGiftAided>
-          <letterCodeGAD>testval</letterCodeGAD>
-          <methodGAD>testval</methodGAD>
-          <motivation>testval</motivation>
-          <inMemoryName>testval</inMemoryName>
-          <gadType>testval</gadType>
+          <accountName>Mrs valid</accountName>
+          <amount>99.99</amount>
+          <bankAccountNumber>43608868</bankAccountNumber>
+          <bankSortCode>050370</bankSortCode>
+          <bankAccountCode>121</bankAccountCode>
+          <frequency>Annually</frequency>
+          <product>CRDD</product>
+          <reference>DJCUJ88365180581</reference>
+          <resCode>RES003</resCode>
+          <source>E13DM1001</source>
+          <dataSource>ACTV</dataSource>
+          <paymentDay>19</paymentDay>
+          <startDate>2020-12-08</startDate>
+          <toBeGiftAided>Y</toBeGiftAided>
+          <letterCodeGAD>11NUPOGAD</letterCodeGAD>
+          <methodGAD>Written</methodGAD>
+          <motivation>MEM</motivation>
+          <inMemoryName>Meercat</inMemoryName>
+          <gadType>Rolling</gadType>
         </directDebit>
         <listOfDonations>
           <donations>
-            <amount>testval</amount>
-            <bankAccountCode>testval</bankAccountCode>
-            <dataSource>testval</dataSource>
-            <dateReceived>testval</dateReceived>
-            <donationType>testval</donationType>
-            <eventCode>testval</eventCode>
-            <financialPaymentReference>testval</financialPaymentReference>
-            <letterCode>testval</letterCode>
-            <resCode>testval</resCode>
-            <paymentMethod>testval</paymentMethod>
-            <paymentStatus>testval</paymentStatus>
-            <personalGiftAid>testval</personalGiftAid>
-            <source>testval</source>
-            <webPageId>testval</webPageId>
-            <originatorPaymentID>testval</originatorPaymentID>
-            <toBeGiftAided>testval</toBeGiftAided>
-            <product>testval</product>
-            <methodGAD>testval</methodGAD>
-            <motivation>testval</motivation>
-            <inMemoryName>testval</inMemoryName>
-            <celebrantDataSource>testval</celebrantDataSource>
-            <celebrantExternalReference>testval</celebrantExternalReference>
-            <paymentProviderTransactionId>testval</paymentProviderTransactionId>
-            <gadType>testval</gadType>
+            <amount>9.99</amount>
+            <bankAccountCode>134</bankAccountCode>
+            <dataSource>ACTV</dataSource>
+            <dateReceived>2020-12-08</dateReceived>
+            <donationType>Payment</donationType>
+            <eventCode>N15YCO</eventCode>
+            <financialPaymentReference>MSJJJ80115250851</financialPaymentReference>
+            <letterCode>09DTDNCC</letterCode>
+            <resCode>RES003</resCode>
+            <paymentMethod>Credit Card</paymentMethod>
+            <paymentStatus>Completed</paymentStatus>
+            <personalGiftAid>Y</personalGiftAid>
+            <reasonNotGiftAid>Y</reasonNotGiftAid>
+            <source>E13DM1001</source>
+            <webPageId>url</webPageId>
+            <originatorPaymentID>ZMFRN5512987829</originatorPaymentID>
+            <toBeGiftAided>Y</toBeGiftAided>
+            <product>ONLDON</product>
+            <methodGAD>Written</methodGAD>
+            <motivation>CEL</motivation>
+            <inMemoryName>John</inMemoryName>
+            <celebrantDataSource>ACTV</celebrantDataSource>
+            <celebrantExternalReference>MJOZA74736447021</celebrantExternalReference>
+            <paymentProviderTransactionId>TGWBA36989330433</paymentProviderTransactionId>
+            <gadType>Rolling</gadType>
+            <excludefromAgresso>N</excludefromAgresso>
           </donations>
         </listOfDonations>
         <listOfSuppressionsPreferences>
           <suppressionsPreferences>
-            <endDate>testval</endDate>
-            <startDate>testval</startDate>
-            <suppressionPreferenceCode>testval</suppressionPreferenceCode>
-            <source>testval</source>
+            <endDate>2030-12-08</endDate>
+            <startDate>2020-12-08</startDate>
+            <suppressionPreferenceCode>NTC</suppressionPreferenceCode>
+            <source>E13DM1001</source>
           </suppressionsPreferences>
         </listOfSuppressionsPreferences>
         <listOfCampaignMembership>
           <campaignMembership>
-            <campaignCode>testval</campaignCode>
-            <contactedOn>testval</contactedOn>
-            <outcome>testval</outcome>
-            <versionCode>testval</versionCode>
-            <campaignRecipientToken>testval</campaignRecipientToken>
+            <campaignCode>00CFA5</campaignCode>
+            <contactedOn>2020-12-08</contactedOn>
+            <outcome>Passed</outcome>
+            <versionCode>N13LRPCM1101</versionCode>
+            <campaignRecipientToken>FSRKV48110119474</campaignRecipientToken>
           </campaignMembership>
         </listOfCampaignMembership>
         <listOfMailingActivities>
           <mailingActivities>
-            <category>testval</category>
-            <endDate>testval</endDate>
-            <letterCode>testval</letterCode>
-            <originatorActivityID>testval</originatorActivityID>
+            <category>Corporate</category>
+            <endDate>2015-01-17T13:11:20</endDate>
+            <letterCode>09DTDNCC</letterCode>
+            <originatorActivityID>ELSTP40244103578</originatorActivityID>
           </mailingActivities>
         </listOfMailingActivities>
         <listOfEventRegistration>
           <eventRegistration>
-            <eventCode>testval</eventCode>
-            <registrationNumber>testval</registrationNumber>
-            <entryType>testval</entryType>
-            <entryFeeStatus>testval</entryFeeStatus>
-            <cancerType>testval</cancerType>
-            <fundraisingPageId>testval</fundraisingPageId>
-            <fundraisingPageType>testval</fundraisingPageType>
-            <fundraisingPageUrl>testval</fundraisingPageUrl>
-            <howHeardAbout>testval</howHeardAbout>
-            <inviteSource>testval</inviteSource>
-            <motivation>testval</motivation>
-            <participationType>testval</participationType>
-            <placeType>testval</placeType>
-            <pledgeAmount>testval</pledgeAmount>
-            <registered>testval</registered>
-            <registrationStatus>testval</registrationStatus>
-            <supporterRegistrationType>testval</supporterRegistrationType>
-            <survivorshipActivities>testval</survivorshipActivities>
-            <runningNumber>testval</runningNumber>
-            <groupName>testval</groupName>
-            <groupRole>testval</groupRole>
-            <emergencyContactName>testval</emergencyContactName>
-            <emergencyContactNumber>testval</emergencyContactNumber>
-            <channel>testval</channel>
-            <source>testval</source>
+            <eventCode/>
+            <registrationNumber>WCFQI17418978264</registrationNumber>
+            <entryType>Individual Organiser</entryType>
+            <entryFeeStatus>Free of charge</entryFeeStatus>
+            <cancerType/>
+            <fundraisingPageId>HDTKD87287233535</fundraisingPageId>
+            <fundraisingPageType>Just Giving</fundraisingPageType>
+            <fundraisingPageUrl>URL</fundraisingPageUrl>
+            <howHeardAbout>CR-UK event</howHeardAbout>
+            <inviteSource>Friends</inviteSource>
+            <motivation>Cancer Experience</motivation>
+            <participationType>Associate Sponsor</participationType>
+            <placeType>Guaranteed Place</placeType>
+            <pledgeAmount>9.99</pledgeAmount>
+            <registered>2020-12-08</registered>
+            <registrationStatus>Invited</registrationStatus>
+            <supporterRegistrationType>Internal</supporterRegistrationType>
+            <survivorshipActivities>Y</survivorshipActivities>
+            <runningNumber>RXPZW37089925839</runningNumber>
+            <groupName>Test Group</groupName>
+            <groupRole>Group Member</groupRole>
+            <emergencyContactName>TestEmergency</emergencyContactName>
+            <emergencyContactNumber>4448987987</emergencyContactNumber>
+            <channel>Email</channel>
+            <source>E13DM1001</source>
+            <listOfRegistrationPack>
+              <registrationPack>
+                <merchandiseProductCode>BMFONL</merchandiseProductCode>
+                <quantity>1</quantity>
+              </registrationPack>
+            </listOfRegistrationPack>
           </eventRegistration>
         </listOfEventRegistration>
         <standingOrders>
-          <amount>testval</amount>
-          <accountName>testval</accountName>
-          <bankAccountNumber>testval</bankAccountNumber>
-          <bankSortCode>testval</bankSortCode>
-          <crukBankAccountCode>testval</crukBankAccountCode>
-          <frequency>testval</frequency>
-          <reference>testval</reference>
-          <source>testval</source>
-          <startDate>testval</startDate>
+          <amount>9.99</amount>
+          <accountName>Mrs valid</accountName>
+          <bankAccountNumber>69255342</bankAccountNumber>
+          <bankSortCode>602040</bankSortCode>
+          <crukBankAccountCode>120</crukBankAccountCode>
+          <frequency>Quarterly</frequency>
+          <reference>KRKAT16088282863</reference>
+          <source>E13DM1001</source>
+          <startDate>2020-12-08</startDate>
         </standingOrders>
         <listOfProfilingInfo>
           <profilingInfo>

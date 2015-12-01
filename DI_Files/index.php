@@ -29,7 +29,7 @@ input.err:hover {
 <header>
 <body>
 <div id="bar">
-<form method="post" action="../../DI_Files/GenericXML.php">
+<form method="post" action="../../DI_Files/Generate.php">
    <input class="err" type="submit" value="Generate XML Files">
 </form>
 <form method="post" action="../../DI_Files/Excel.php">
