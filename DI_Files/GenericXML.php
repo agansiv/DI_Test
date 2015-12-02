@@ -1,5 +1,4 @@
 <?php
-echo $_POST["TestCases"];
 Class Generic {
 	public function core($query) {
 
