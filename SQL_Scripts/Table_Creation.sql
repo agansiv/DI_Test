@@ -80,7 +80,7 @@ Begin
  if str_type= 'Alpa' then
  select dbms_random.string('L', 15) into retval from dual;
  elsif str_type= 'Numeric' then
-  select round(dbms_random.value(1,90000000000)) into retval from DI_REF_DATA where field = vfield;
+  select round(dbms_random.value(1,90000000000)) into retval from dual;
  elsif str_type= 'AlphaNumeric' then
   select dbms_random.string('U', 5)||round(dbms_random.value(1,90000000000)) into retval from dual;
   elsif str_type= 'Static' then

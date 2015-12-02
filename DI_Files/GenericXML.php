@@ -68,10 +68,16 @@ Class Generic {
 					$supporter->appendChild($nonTaxPayerFlag);
 					$nonTaxPayerStartDate=$xml->createElement("nonTaxPayerStartDate",odbc_result($result, "SUPP_nonTaxPayerStartDate"));
 					$supporter->appendChild($nonTaxPayerStartDate);
+					
+					if (!empty(odbc_result($result,"SUPP_dateOfDeath"))) {
 					$dateOfDeath=$xml->createElement("dateOfDeath",odbc_result($result, "SUPP_dateOfDeath"));
 					$supporter->appendChild($dateOfDeath);
+					} 
+					if (!empty(odbc_result($result,"SUPP_deathNotificationDate"))) {
 					$deathNotificationDate=$xml->createElement("deathNotificationDate",odbc_result($result, "SUPP_deathNotificationDate"));
 					$supporter->appendChild($deathNotificationDate);
+					} 
+					
 					$maritalStatus=$xml->createElement("maritalStatus",odbc_result($result, "SUPP_maritalStatus"));
 					$supporter->appendChild($maritalStatus);
 					$address=$xml->createElement("address");
@@ -170,7 +176,7 @@ Class Generic {
 					$directDebit->appendChild($bankAccountNumber);
 					$bankSortCode=$xml->createElement("bankSortCode",odbc_result($result,"DD_bankSortCode"));
 					$directDebit->appendChild($bankSortCode);
-					$bankAccountCode=$xml->createElement("bankAccountCode",odbc_result($result,"DD_bankAccountCodeCRUK"));
+					$bankAccountCode=$xml->createElement("bankAccountCode-CRUK",odbc_result($result,"DD_bankAccountCodeCRUK"));
 					$directDebit->appendChild($bankAccountCode);
 					$frequency=$xml->createElement("frequency",odbc_result($result,"DD_frequency"));
 					$directDebit->appendChild($frequency);
@@ -207,7 +213,7 @@ Class Generic {
 					$listOfDonations->appendChild($donations);
 					$amount=$xml->createElement("amount",odbc_result($result,"Don_amount"));
 					$donations->appendChild($amount);
-					$bankAccountCode=$xml->createElement("bankAccountCode",odbc_result($result,"Don_bankAccountCodeCRUK"));
+					$bankAccountCode=$xml->createElement("bankAccountCode-CRUK",odbc_result($result,"Don_bankAccountCodeCRUK"));
 					$donations->appendChild($bankAccountCode);
 					$DdataSource=$xml->createElement("dataSource",odbc_result($result,"Don_dataSource"));
 					$donations->appendChild($DdataSource);
@@ -242,7 +248,7 @@ Class Generic {
 					$DtoBeGiftAided=$xml->createElement("toBeGiftAided",odbc_result($result,"Don_toBeGiftAided"));
 					$donations->appendChild($DtoBeGiftAided);
 					$DletterCodeGAD=$xml->createElement("letterCodeGAD",odbc_result($result,"Don_letterCodeGAD"));
-					$donations->appendChild($Dproduct);
+					$donations->appendChild($DletterCodeGAD);
 					$DmethodGAD=$xml->createElement("methodGAD",odbc_result($result,"Don_methodGAD"));
 					$donations->appendChild($DmethodGAD);
 					$Dmotivation=$xml->createElement("motivation",odbc_result($result,"Don_motivation"));
@@ -285,7 +291,7 @@ Class Generic {
 					$campaignMembership->appendChild($outcome);
 					$versionCode=$xml->createElement("versionCode",odbc_result($result,"Camp_versionCode"));
 					$campaignMembership->appendChild($versionCode);
-					$campaignRecipientToken=$xml->createElement("campaignRecipientToken",odbc_result($result,"Camp_campaignRecipient"));
+					$campaignRecipientToken=$xml->createElement("campaignRecipientToken",substr(odbc_result($result,"Camp_campaignRecipient"),-5));
 					$campaignMembership->appendChild($campaignRecipientToken);
 					#Actitvites
 					$listOfMailingActivities=$xml->createElement("listOfMailingActivities");
@@ -341,7 +347,7 @@ Class Generic {
 					$eventRegistration->appendChild($supporterRegistrationType);
 					$survivorshipActivities=$xml->createElement("survivorshipActivities",odbc_result($result,"EVT_survivorshipActivities"));
 					$eventRegistration->appendChild($survivorshipActivities);
-					$runningNumber=$xml->createElement("runningNumber",odbc_result($result,"EVT_runningNumber"));
+					$runningNumber=$xml->createElement("runningNumber",substr(odbc_result($result,"EVT_runningNumber"),-8));
 					$eventRegistration->appendChild($runningNumber);
 					$groupName=$xml->createElement("groupName",odbc_result($result,"EVT_groupName"));
 					$eventRegistration->appendChild($groupName);
@@ -390,110 +396,186 @@ Class Generic {
 					$supporter->appendChild($listOfProfilingInfo);
 					$profilingInfo=$xml->createElement("profilingInfo");
 					$listOfProfilingInfo->appendChild($profilingInfo);
-					$codeLevel1=$xml->createElement("codeLevel1","testval");
+					$codeLevel1=$xml->createElement("codeLevel1",odbc_result($result,"Pinfo_codeLevel1"));
 					$profilingInfo->appendChild($codeLevel1);
-					$codeLevel2=$xml->createElement("codeLevel2","testval");
+					$codeLevel2=$xml->createElement("codeLevel2",odbc_result($result,"Pinfo_codeLevel2"));
 					$profilingInfo->appendChild($codeLevel2);
-					$Profsource=$xml->createElement("source","testval");
+					$Profsource=$xml->createElement("source",odbc_result($result,"Pinfo_source"));
 					$profilingInfo->appendChild($Profsource);
-					$Profcomments=$xml->createElement("comments","testval");
+					$Profcomments=$xml->createElement("comments",odbc_result($result,"Pinfo_comments"));
 					$profilingInfo->appendChild($Profcomments);
-					$ProfstartDate=$xml->createElement("startDate","testval");
+					$ProfstartDate=$xml->createElement("startDate",odbc_result($result,"Pinfo_startDate"));
 					$profilingInfo->appendChild($ProfstartDate);
-					$siebelAttribute1=$xml->createElement("siebelAttribute1","testval");
+					$ProfendDate=$xml->createElement("endDate",odbc_result($result,"Pinfo_endDate"));
+					$profilingInfo->appendChild($ProfendDate);
+					$siebelAttribute1=$xml->createElement("siebelAttribute1",odbc_result($result,"Pinfo_siebelAttribute1"));
 					$profilingInfo->appendChild($siebelAttribute1);
-					$siebelAttribute6=$xml->createElement("siebelAttribute6","testval");
+					$siebelAttribute6=$xml->createElement("siebelAttribute6",odbc_result($result,"Pinfo_siebelAttribute6"));
 					$profilingInfo->appendChild($siebelAttribute6);
 					#Opportunity
 					$listOfOpportunity=$xml->createElement("listOfOpportunity");
 					$supporter->appendChild($listOfOpportunity);
 					$opportunity=$xml->createElement("opportunity");
 					$listOfOpportunity->appendChild($opportunity);
-					$OptydataSource=$xml->createElement("dataSource","testval");
+					$OptydataSource=$xml->createElement("dataSource",odbc_result($result,"Oppty_dataSource"));
 					$opportunity->appendChild($OptydataSource);
-					$OptycrukReference=$xml->createElement("crukReference","testval");
-					$opportunity->appendChild($OptycrukReference);
-					$OptyexternalReference=$xml->createElement("externalReference","testval");
-					$opportunity->appendChild($OptyexternalReference);
-					$Optydepartment=$xml->createElement("department","testval");
+					
+					#Choice element on opty 
+
+					if (!empty(odbc_result($result,"Oppty_crukReference")) and   !empty(odbc_result($result,"Oppty_externalReference"))) {
+							$OptycrukReference=$xml->createElement("crukReference",odbc_result($result,"Oppty_crukReference"));
+							$opportunity->appendChild($OptycrukReference);
+							$OptyexternalReference=$xml->createElement("externalReference",odbc_result($result,"Oppty_externalReference"));
+							$opportunity->appendChild($OptyexternalReference);
+					} 
+					elseif (empty(odbc_result($result,"Oppty_crukReference")) and   !empty(odbc_result($result,"Oppty_externalReference"))) {
+							$OptyexternalReference=$xml->createElement("externalReference",odbc_result($result,"Oppty_externalReference"));
+							$opportunity->appendChild($OptyexternalReference);
+					}
+					elseif (!empty(odbc_result($result,"Oppty_crukReference")) and   empty(odbc_result($result,"Oppty_externalReference"))) {
+							$OptycrukReference=$xml->createElement("crukReference",odbc_result($result,"Oppty_crukReference"));
+							$opportunity->appendChild($OptycrukReference);
+					}
+					elseif (empty(odbc_result($result,"Oppty_crukReference")) and   empty(odbc_result($result,"Oppty_externalReference"))) {
+							$OptycrukReference=$xml->createElement("crukReference",odbc_result($result,"Oppty_crukReference"));
+							$opportunity->appendChild($OptycrukReference);
+							$OptyexternalReference=$xml->createElement("externalReference",odbc_result($result,"Oppty_externalReference"));
+							$opportunity->appendChild($OptyexternalReference);
+						 }
+					
+					
+					$Optydepartment=$xml->createElement("department",odbc_result($result,"Oppty_department"));
 					$opportunity->appendChild($Optydepartment);
-					$journey=$xml->createElement("journey","testval");
+					$journey=$xml->createElement("journey",odbc_result($result,"Oppty_journey"));
 					$opportunity->appendChild($journey);
-					$stage=$xml->createElement("stage","testval");
+					$stage=$xml->createElement("stage",odbc_result($result,"Oppty_stage"));
 					$opportunity->appendChild($stage);
-					$Optysource=$xml->createElement("source","testval");
+					$Optysource=$xml->createElement("source",odbc_result($result,"Oppty_source"));
 					$opportunity->appendChild($Optysource);
-					$OptystartDate=$xml->createElement("startDate","testval");
+					$OptystartDate=$xml->createElement("startDate",odbc_result($result,"Oppty_startDate"));
 					$opportunity->appendChild($OptystartDate);
-					$optydescription=$xml->createElement("description","testval");
+					$optydescription=$xml->createElement("description",odbc_result($result,"Oppty_description"));
 					$opportunity->appendChild($optydescription);
-					$optylikelihood=$xml->createElement("likelihood","testval");
+					$optylikelihood=$xml->createElement("likelihood",odbc_result($result,"Oppty_likelihood"));
 					$opportunity->appendChild($optylikelihood);
-					$currency=$xml->createElement("currency","testval");
+					$currency=$xml->createElement("currency",odbc_result($result,"Oppty_currency"));
 					$opportunity->appendChild($currency);
+					$OptyendDate=$xml->createElement("endDate",odbc_result($result,"Oppty_endDate"));
+					$opportunity->appendChild($OptyendDate);
+					$OreasonForClosure=$xml->createElement("reasonForClosure",odbc_result($result,"Oppty_reasonForClosure"));
+					$opportunity->appendChild($OreasonForClosure);
+					$OclosureSummary=$xml->createElement("closureSummary",odbc_result($result,"Oppty_closureSummary"));
+					$opportunity->appendChild($OclosureSummary);
 					#opty Product
 					$listOfOpportunityProduct=$xml->createElement("listOfOpportunityProduct");
 					$opportunity->appendChild($listOfOpportunityProduct);
 					$opportunityProduct=$xml->createElement("opportunityProduct");
 					$listOfOpportunityProduct->appendChild($opportunityProduct);
-					$OProddataSource=$xml->createElement("dataSource","testval");
-					$opportunityProduct->appendChild($OProddataSource);
-					$OProdcrukReference=$xml->createElement("crukReference","testval");
-					$opportunityProduct->appendChild($OProdcrukReference);
-					$OProdexternalReference=$xml->createElement("externalReference","testval");
-					$opportunityProduct->appendChild($OProdexternalReference);
-					$OproddataSource=$xml->createElement("dataSource","testval");
+					
+					#Choice element on opty Product
+
+					if (!empty(odbc_result($result,"OpptyProd_crukReference")) and   !empty(odbc_result($result,"OpptyProd_externalReference"))) {
+							$OProdcrukReference=$xml->createElement("crukReference",odbc_result($result,"OpptyProd_crukReference"));
+							$opportunityProduct->appendChild($OProdcrukReference);
+							$OProdexternalReference=$xml->createElement("externalReference",odbc_result($result,"OpptyProd_externalReference"));
+							$opportunityProduct->appendChild($OProdexternalReference);
+					} 
+					elseif (empty(odbc_result($result,"OpptyProd_crukReference")) and   !empty(odbc_result($result,"OpptyProd_externalReference")))  {
+							$OProdexternalReference=$xml->createElement("externalReference",odbc_result($result,"OpptyProd_externalReference"));
+							$opportunityProduct->appendChild($OProdexternalReference);
+					}
+					elseif (!empty(odbc_result($result,"OpptyProd_crukReference")) and   empty(odbc_result($result,"OpptyProd_externalReference")))  {
+							$OProdcrukReference=$xml->createElement("crukReference",odbc_result($result,"OpptyProd_crukReference"));
+							$opportunityProduct->appendChild($OProdcrukReference);
+					}
+					elseif (empty(odbc_result($result,"OpptyProd_crukReference")) and   empty(odbc_result($result,"OpptyProd_externalReference")))  {
+							$OProdcrukReference=$xml->createElement("crukReference",odbc_result($result,"OpptyProd_crukReference"));
+							$opportunityProduct->appendChild($OProdcrukReference);
+							$OProdexternalReference=$xml->createElement("externalReference",odbc_result($result,"OpptyProd_externalReference"));
+							$opportunityProduct->appendChild($OProdexternalReference);
+						 }
+					
+					
+					$OproddataSource=$xml->createElement("dataSource",odbc_result($result,"OpptyProd_dataSource"));
 					$opportunityProduct->appendChild($OproddataSource);
-					$OpproductCode=$xml->createElement("productCode","testval");
+					$OpproductCode=$xml->createElement("productCode",odbc_result($result,"OpptyProd_productCode"));
 					$opportunityProduct->appendChild($OpproductCode);
-					$targetAmount=$xml->createElement("targetAmount","testval");
+					$targetAmount=$xml->createElement("targetAmount",odbc_result($result,"OpptyProd_targetAmount"));
 					$opportunityProduct->appendChild($targetAmount);
-					$askAmount=$xml->createElement("askAmount","testval");
+					$askAmount=$xml->createElement("askAmount",odbc_result($result,"OpptyProd_askAmount"));
 					$opportunityProduct->appendChild($askAmount);
-					$askDate=$xml->createElement("askDate","testval");
+					$askDate=$xml->createElement("askDate",odbc_result($result,"OpptyProd_askDate"));
 					$opportunityProduct->appendChild($askDate);
-					$percentage=$xml->createElement("percentage","testval");
+					$percentage=$xml->createElement("percentage",odbc_result($result,"OpptyProd_percentage"));
 					$opportunityProduct->appendChild($percentage);
-					$agreedAmount=$xml->createElement("agreedAmount","testval");
+					$agreedAmount=$xml->createElement("agreedAmount",odbc_result($result,"OpptyProd_agreedAmount"));
 					$opportunityProduct->appendChild($agreedAmount);
-					$expectedDate=$xml->createElement("expectedDate","testval");
+					$expectedDate=$xml->createElement("expectedDate",odbc_result($result,"OpptyProd_expectedDate"));
 					$opportunityProduct->appendChild($expectedDate);
-					$notes=$xml->createElement("notes","testval");
+					$notes=$xml->createElement("notes",odbc_result($result,"OpptyProd_notes"));
 					$opportunityProduct->appendChild($notes);
-					$OprodresCode=$xml->createElement("resCode","testval");
+					$OprodresCode=$xml->createElement("resCode",odbc_result($result,"OpptyProd_resCode"));
 					$opportunityProduct->appendChild($OprodresCode);
-					$motivation=$xml->createElement("motivation","testval");
+					$motivation=$xml->createElement("motivation",odbc_result($result,"OpptyProd_motivation"));
 					$opportunityProduct->appendChild($motivation);
-					$inMemoryName=$xml->createElement("inMemoryName","testval");
+					$inMemoryName=$xml->createElement("inMemoryName",odbc_result($result,"OpptyProd_inMemoryName"));
 					$opportunityProduct->appendChild($inMemoryName);
 					#OpportunityActivities
 					$listOfOpportunityActivities=$xml->createElement("listOfOpportunityActivities");
 					$opportunity->appendChild($listOfOpportunityActivities);
 					$opportunityActivities=$xml->createElement("opportunityActivities");
 					$listOfOpportunityActivities->appendChild($opportunityActivities);
-					$OpadataSource=$xml->createElement("dataSource","testval");
+					
+					
+					#Choice element on opty Product
+
+					if (!empty(odbc_result($result,"OpptyAct_crukReference")) and   !empty(odbc_result($result,"OpptyAct_externalReference"))) {
+							$OActcrukReference=$xml->createElement("crukReference",odbc_result($result,"OpptyAct_crukReference"));
+							$opportunityActivities->appendChild($OActcrukReference);
+							$OActexternalReference=$xml->createElement("externalReference",odbc_result($result,"OpptyAct_externalReference"));
+							$opportunityActivities->appendChild($OActexternalReference);
+					} 
+					elseif (empty(odbc_result($result,"OpptyAct_crukReference")) and   !empty(odbc_result($result,"OpptyAct_externalReference")))  {
+							$OActexternalReference=$xml->createElement("externalReference",odbc_result($result,"OpptyAct_externalReference"));
+							$opportunityActivities->appendChild($OActexternalReference);
+					}
+					elseif (!empty(odbc_result($result,"OpptyAct_crukReference")) and   empty(odbc_result($result,"OpptyAct_externalReference")))  {
+							$OActcrukReference=$xml->createElement("crukReference",odbc_result($result,"OpptyAct_crukReference"));
+							$opportunityActivities->appendChild($OActcrukReference);
+					}
+					elseif (empty(odbc_result($result,"OpptyAct_crukReference")) and   empty(odbc_result($result,"OpptyAct_externalReference")))  {
+							$OActcrukReference=$xml->createElement("crukReference",odbc_result($result,"OpptyAct_crukReference"));
+							$opportunityActivities->appendChild($OActcrukReference);
+							$OActexternalReference=$xml->createElement("externalReference",odbc_result($result,"OpptyAct_externalReference"));
+							$opportunityActivities->appendChild($OActexternalReference);
+						 }
+					
+					
+					
+					
+					$OpadataSource=$xml->createElement("dataSource",odbc_result($result,"OpptyAct_dataSource"));
 					$opportunityActivities->appendChild($OpadataSource);
-					$Opatype=$xml->createElement("type","testval");
+					$Opatype=$xml->createElement("type",odbc_result($result,"OpptyAct_type"));
 					$opportunityActivities->appendChild($Opatype);
-					$subType=$xml->createElement("subType","testval");
+					$subType=$xml->createElement("subType",odbc_result($result,"OpptyAct_subType"));
 					$opportunityActivities->appendChild($subType);
-					$Opacategory=$xml->createElement("category","testval");
+					$Opacategory=$xml->createElement("category",odbc_result($result,"OpptyAct_category"));
 					$opportunityActivities->appendChild($Opacategory);
-					$OpasubCategory=$xml->createElement("subCategory","testval");
+					$OpasubCategory=$xml->createElement("subCategory",odbc_result($result,"OpptyAct_subCategory"));
 					$opportunityActivities->appendChild($OpasubCategory);
-					$Opadescription=$xml->createElement("description","testval");
+					$Opadescription=$xml->createElement("description",odbc_result($result,"OpptyAct_description"));
 					$opportunityActivities->appendChild($Opadescription);
-					$Opacomments=$xml->createElement("comments","testval");
+					$Opacomments=$xml->createElement("comments",odbc_result($result,"OpptyAct_comments"));
 					$opportunityActivities->appendChild($Opacomments);
-					$completedDate=$xml->createElement("completedDate","testval");
+					$completedDate=$xml->createElement("completedDate",odbc_result($result,"OpptyAct_completedDate"));
 					$opportunityActivities->appendChild($completedDate);
-					$Opastatus=$xml->createElement("status","testval");
+					$Opastatus=$xml->createElement("status",odbc_result($result,"OpptyAct_status"));
 					$opportunityActivities->appendChild($Opastatus);
-					$OpastartDate=$xml->createElement("startDate","testval");
+					$OpastartDate=$xml->createElement("startDate",odbc_result($result,"OpptyAct_startDate"));
 					$opportunityActivities->appendChild($OpastartDate);
-					$OpaendDate=$xml->createElement("endDate","testval");
+					$OpaendDate=$xml->createElement("endDate",odbc_result($result,"OpptyAct_endDate"));
 					$opportunityActivities->appendChild($OpaendDate);
-					$Opasource=$xml->createElement("source","testval");
+					$Opasource=$xml->createElement("source",odbc_result($result,"OpptyAct_source"));
 					$opportunityActivities->appendChild($Opasource);
 				}
 				#echo odbc_num_rows(odbc_exec($connect, $cou));
