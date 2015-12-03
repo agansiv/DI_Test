@@ -24,12 +24,8 @@ Class NewDonate {
 					$gen->appendChild($supporter);
 					$pExtRef = $xml->createElement("primaryExternalReferenceId",odbc_result($result, "SUPP_primaryExternalRefId"));
 					$supporter->appendChild($pExtRef);
-					$secondaryExternalReferenceId = $xml->createElement("secondaryExternalReferenceId",odbc_result($result, "SUPP_secondaryExternalRefId"));
-					$supporter->appendChild($secondaryExternalReferenceId);
 					$PDataSo = $xml->createElement("primaryDataSourceCode",odbc_result($result, "SUPP_primaryDataSourceCode"));
 					$supporter->appendChild($PDataSo);
-					$secondaryDataSourceCode = $xml->createElement("secondaryDataSourceCode",odbc_result($result, "SUPP_secondaryDataSourceCode"));
-					$supporter->appendChild($secondaryDataSourceCode);	
 					$fore=$xml->createElement("forename",odbc_result($result, "SUPP_forename"));
 					$supporter->appendChild($fore);
 					$SSdate = $xml->createElement("startDate",odbc_result($result, "SUPP_startDate"));
@@ -55,8 +51,6 @@ Class NewDonate {
 					$address->appendChild($addressLine3);
 					$addressLine4=$xml->createElement("addressLine4",odbc_result($result, "ADDR_addressLine4"));
 					$address->appendChild($addressLine4);
-					$cherishedAddressHouseName=$xml->createElement("cherishedAddressHouseName",odbc_result($result, "ADDR_cherishedAddressHN"));
-					$address->appendChild($cherishedAddressHouseName);
 					$city=$xml->createElement("city",odbc_result($result, "ADDR_city"));
 					$address->appendChild($city);
 					$country=$xml->createElement("country",odbc_result($result, "ADDR_country"));

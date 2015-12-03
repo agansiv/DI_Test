@@ -16,7 +16,7 @@ Class LSDs {
 				$xml = new DOMDocument("1.0","utf-8");
 				$xml->formatOutput =true;
 				#$root = $xml->createElementNS('http://www.cancerresearchuk.org/di/r17/supplier/newdonate');
-				$gen=$xml->createElementNS("http://www.cancerresearchuk.org/di/r17/supplier/LSD","batch");
+				$gen=$xml->createElementNS("http://www.cancerresearchuk.org/di/r19/supplier/lsd","batch");
 				$xml->appendChild($gen);
 				$id=$xml->createElement("id",date('YmdHis'));
 				$gen->appendChild($id);
@@ -45,11 +45,11 @@ Class LSDs {
 					$supporter->appendChild($SuppURN);
 					$surname=$xml->createElement("surname",odbc_result($result, "SUPP_surname"));
 					$supporter->appendChild($surname);
-					$lsdFlag=$xml->createElement("lsdFlag",odbc_result($result, "SUPP_title"));
+					$lsdFlag=$xml->createElement("lsdFlag",odbc_result($result, "SUPP_lsdFlag"));
 					$supporter->appendChild($lsdFlag);
-					$lsdIdentifier=$xml->createElement("lsdIdentifier",odbc_result($result, "SUPP_changeofNameIndicator"));
+					$lsdIdentifier=$xml->createElement("lsdIdentifier",odbc_result($result, "SUPP_lsdIdentifier"));
 					$supporter->appendChild($lsdIdentifier);
-					$lsdType=$xml->createElement("lsdType",odbc_result($result, "SUPP_nonTaxPayerFlag"));
+					$lsdType=$xml->createElement("lsdType",odbc_result($result, "SUPP_lsdType"));
 					$supporter->appendChild($lsdType);
 					#Contact Info
 					$contactInfoE=$xml->createElement("contactInfo-Email");
@@ -71,7 +71,7 @@ Class LSDs {
 					$donations->appendChild($bankAccountCode);
 					$DdataSource=$xml->createElement("dataSource",odbc_result($result,"Don_dataSource"));
 					$donations->appendChild($DdataSource);
-					$dateReceived=$xml->createElement("dateReceived",odbc_result($result,"Don_dateReceived"));
+					$dateReceived=$xml->createElement("dateReceived",odbc_result($result,"Don_dateReceived")."T13:11:20");
 					$donations->appendChild($dateReceived);
 					$donationType=$xml->createElement("donationType",odbc_result($result,"Don_donationType"));
 					$donations->appendChild($donationType);
@@ -91,15 +91,15 @@ Class LSDs {
 					$donations->appendChild($originatorPaymentID);
 					$DreasonNotGiftAid=$xml->createElement("reasonNotGiftAid",odbc_result($result,"Don_toBeGiftAided"));
 					$donations->appendChild($DreasonNotGiftAid);
-					$shortCode=$xml->createElement("shortCode",odbc_result($result,"Don_letterCodeGAD"));
+					$shortCode=$xml->createElement("shortCode",odbc_result($result,"Don_shortCode"));
 					$donations->appendChild($shortCode);
-					$statusDelay=$xml->createElement("statusDelay",odbc_result($result,"Don_methodGAD"));
+					$statusDelay=$xml->createElement("statusDelay",odbc_result($result,"Don_statusDelay"));
 					$donations->appendChild($statusDelay);
-					$statusDelayUnit=$xml->createElement("statusDelayUnit",odbc_result($result,"Don_motivation"));
+					$statusDelayUnit=$xml->createElement("statusDelayUnit",odbc_result($result,"Don_statusDelayUnit"));
 					$donations->appendChild($statusDelayUnit);
-					$mobileOperator=$xml->createElement("mobileOperator",odbc_result($result,"Don_inMemoryName"));
+					$mobileOperator=$xml->createElement("mobileOperator",odbc_result($result,"Don_mobileOperator"));
 					$donations->appendChild($mobileOperator);
-					$keyword=$xml->createElement("keyword",odbc_result($result,"Don_celebrantDataSource"));
+					$keyword=$xml->createElement("keyword",odbc_result($result,"Don_keyword"));
 					$donations->appendChild($keyword);
 					#Suppressions
 					$listOfSuppressionsPreferences=$xml->createElement("listOfSuppressionsPreferences");
