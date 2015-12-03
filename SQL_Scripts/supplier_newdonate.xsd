@@ -1,0 +1,1040 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Data Supplier Schema Definition for New Donate
+
+Version History
+===============
+
+Versions 1-4 on sharepoint were prior to agreement of versioning protocol, so Initial version is version 4.
+For R17 - See version 23
+
+Version 36 Deepika Garg 22 Oct 2015
+===============================================================
+IBA-1306: Allow '&' in Address line 1 of XSD
+
+Version 35 - 14 Oct 2015 - Deepika Garg
+=========================================
+Remove regex validation from e-mail address
+
+Version 34 - 22 Sep 2015 - Deepika Garg
+=========================================
+Changed financialPaymentReference to non-mandatory and removed Min length = 1 restriction
+
+Version 33 - 16 Sep 2015 - Hemal Patel
+=========================================
+Changed Postcode to non-mandatory
+
+Version 32 - 20 April 2015 - Dave Budd
+=========================================
+CR Event Code added to Donation
+
+Version 31 - 12 February 2015 - Dave Budd
+=========================================
+IN019131 - GAD Type optional on GAD
+
+Version 30 - 12 January 2015 - Dave Budd
+========================================
+IN019034 - GAD Type optional on DD
+
+Version 29 - 16 December 2014 - Dave Budd
+==========================================
+IN018880 - GAD Type mandatory on GAD
+
+Version 28 - 12 December 2014 - Dave Budd
+==========================================
+IN018906 - DD RES Code length to 50
+
+Version 27 - 2 December 2014 - Dave Budd
+==========================================
+IN018880 - GAD Type mandatory on DD
+IN018881 - To Be Gift Aided mandatory for Donation and DD
+IN018882 - Address Line 1 minLength = 2
+
+Version 26 - 17 November 2014 - Dave Budd
+==========================================
+Added gadType to Donation, Direct Debit and Gift Aid Declaration
+Added annotations 
+
+Version 25 - 4 November 2014 - Dave Budd
+==========================================
+R18 - First draft
+resCode added to Donation and Direct Debit
+paymentProviderTransactionId added to Donation
+
+Version 24 - 4 November 2014 - Dave Budd
+==========================================
+Ignore - incorrect copy
+
+Version 23 - 29 September 2014 - Dave Budd
+==========================================
+IN018707 - Make Financial Payment Reference mandatory
+
+Version 22 - 16 September 2014 - Dave Budd
+==========================================
+IN018690 - Allow spaces in the Supporter Title
+
+Version 21 - 16 September 2014 - Dave Budd
+==========================================
+IN018624 - Ensure DD and Donation amounts are less than 10,000,000 (inline with v15 IN018418 precision of 9,2)
+
+Version 20 - 16 September 2014 - Dave Budd
+==========================================
+IN018590 Enhancement (see changes in commonTypesDI for the other 2)
+- Addition of Address Line 4
+- Name of Direct Debit Account Holder will require a minimum of 2 characters
+
+Version 19 - 2 September 2014 - Dave Budd
+=========================================
+- IN018578 - Make Transaction Reference mandatory
+- IN018583 - Make Doantion Originator Payment Reference mandatory
+- IN018586 - Make Doantion Letter Code GAD length = 30
+
+Version 18 -27 August 2014 - Dave Budd
+======================================
+- IN018408 allow lowercase on Address Postal Code
+
+Version 17 -21 August 2014 - Dave Budd
+======================================
+- IN018494 - Donation Financial Payment Reference can contain hyphens
+
+Version 16 -21 August 2014 - Dave Budd
+======================================
+- IN018487 - GAD Method made optional for boh Donation and Direct Debit
+
+Version 15 -19 August 2014 - Dave Budd
+======================================
+- IN018418 
+- Length of Supporter Firstname set to 50
+- Length of Address City set to 50
+- Precision of Donation Amount to 9,2
+- Precision of Direct Debit Amount to 9,2
+- Length of Donation Source set to 30
+
+Version 14 -19 August 2014 - Dave Budd
+======================================
+- Requirement Clarification - Length of Address.Validation Status set to 20
+
+Version 13 -18 August 2014 - Dave Budd
+======================================
+- IN018408 - Added pattern validation to Address.Postcode A-Z 0-9 and spaces allowed
+
+Version 12 -14 August 2014 - Dave Budd
+======================================
+- IN018219 - Added pattern restriction to Donation->Financial Payment Reference (alpha numeric and forward slash)
+- IN018390 - Removed restrictions from Primary and Secondary references
+
+Version 11 -12 August 2014 - Dave Budd
+======================================
+- IN018226 Restricted Amount precision (DD and Donation) to 17,2
+- IN018219 Amended RegExs for Address City,County,Country and Validation Status (also covers IN018367)
+- IN018367 see above
+- IN018329 Replaced string types with token type to ignore leading/trailing and internally repeated whitespace 
+- IN018243 Amended MailingActivities changed completeDate to endDate and reintroduced Orignator Id and Category
+- IN018336 Removed type from contact info and Status from GAD. Made Donation -> Payment Status mandatory
+
+Version 10 - 5 August 2014 - Dave Budd
+======================================
+- IN018243 Removed all but Completed Date and Letter Code from Mail Activities
+
+Version 9 - 4 August 2014 - Dave Budd
+=====================================
+- IN018247 Resized Address validation status to 20 chars
+- IN018248 Removed channel and type from suppressions
+
+Version 8 - 21 July 2014 - Dave Budd
+====================================
+- Added maxlength of 50 to types for Mobile
+
+Version 7 - 21 July 2014 - Dave Budd
+====================================
+- forename, surname changed to be based on PartyNamePerson
+- Added maxlength of 50 to types for Phone 
+- Added maxlength of 30 to Donation.dontationType
+- Added maxlength of 30 to DirectDebit.letterCodeGAD
+
+Version 6 - non functional change 
+====================================
+- fixing release error in version 5 which was based over version 3 by mistake
+
+Version 5 - 11 July 2014 - Dave Budd
+====================================
+Added 3 new elements to Direct Debit
+- Motivation
+- In Memory Name
+- Data Source
+
+Version 4 - Initial
+===================
+Initial release to New Donate
+
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.cancerresearchuk.org/di/r17/supplier/newdonate" xmlns:com="http://www.cancerresearchuk.org/di/r17/commonTypes" targetNamespace="http://www.cancerresearchuk.org/di/r17/supplier/newdonate" elementFormDefault="qualified">
+	<import namespace="http://www.cancerresearchuk.org/di/r17/commonTypes" schemaLocation="commonTypesDI.xsd"/>
+	<complexType name="Supporter">
+		<sequence>
+			<element name="primaryExternalReferenceId" minOccurs="0">
+				<annotation>
+					<documentation>Supply UUID</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="primaryDataSourceCode" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="secondaryExternalReferenceId" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="secondaryDataSourceCode" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="forename" nillable="false">
+				<annotation>
+					<documentation>ampersand, ' and ' are not allowed Should not be part of exlusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:PartyNamePerson">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="dateTime" nillable="false">
+				<annotation>
+					<documentation>System Date</documentation>
+				</annotation>
+			</element>
+			<element name="source" nillable="false">
+				<annotation>
+					<documentation>Mapped from URL (gives us the appeal) to the appeal's campaign code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusCode" nillable="false">
+				<annotation>
+					<documentation>Supply 'Live'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusDate" type="date" nillable="false">
+				<annotation>
+					<documentation>System Date</documentation>
+				</annotation>
+			</element>
+			<element name="surname" nillable="false">
+				<annotation>
+					<documentation> ampersand, ' and ' are not allowed Should not be part of exlusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:PartyNamePerson">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="title" minOccurs="0">
+				<annotation>
+					<documentation> ampersand, ' and ' are not allowed Should not be part of exlusion list Should allow spaces</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+						<pattern value="[a-zA-Z ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="address" type="tns:Address" nillable="false">
+				<annotation/>
+			</element>
+			<element name="contactInfo-Phone" type="tns:ContactInfo-Phone" minOccurs="0">
+				<annotation/>
+			</element>
+			<element name="contactInfo-Email" type="tns:ContactInfo-Email" minOccurs="0">
+				<annotation/>
+			</element>
+			<element name="contactInfo-Mobile" type="tns:ContactInfo-Mobile" minOccurs="0">
+				<annotation/>
+			</element>
+			<element name="giftAidDeclaration" type="tns:GiftAidDeclaration" minOccurs="0">
+				<annotation/>
+			</element>
+			<element name="directDebit" type="tns:DirectDebit" minOccurs="0">
+				<annotation/>
+			</element>
+			<element name="listOfDonations" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="donations" type="tns:Donations" minOccurs="0" maxOccurs="unbounded">
+							<annotation/>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfSuppressionsPreferences" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="suppressionsPreferences" type="tns:SuppressionsPreferences" minOccurs="0" maxOccurs="unbounded">
+							<annotation/>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfMailingActivities" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="mailingActivities" type="tns:MailingActivities" minOccurs="0" maxOccurs="unbounded">
+							<annotation/>
+						</element>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Transaction">
+		<sequence>
+			<element name="reference" nillable="false">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="supporter" type="tns:Supporter" nillable="false">
+				<annotation/>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Address">
+		<sequence>
+			<element name="addressLine1" nillable="false">
+				<annotation>
+					<documentation> Must not equal other address line   • Commas are not permitted in Address Lines • Where commas are found in Address Lines they should be used as a line break and then stripped out • 4 Address Lines need to be allowed for • Where addresses extend beyond 4 address lines, all remaining addresse information should be in address line 4 but without commas • Where the presence of a comma results in address details being moved to a line that already holds information, that information will need to be moved to the line    Should not be part of exlusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="2"/>
+						<maxLength value="200"/>
+						<pattern value="[a-zA-Z0-9\-/\.&apos;&amp; ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="addressLine2" minOccurs="0">
+				<annotation>
+					<documentation> Must not equal other address line   • Commas are not permitted in Address Lines • Where commas are found in Address Lines they should be used as a line break and then stripped out • 4 Address Lines need to be allowed for • Where addresses extend beyond 4 address lines, all remaining addresse information should be in address line 4 but without commas • Where the presence of a comma results in address details being moved to a line that already holds information, that information will need to be moved to the line   should not be NULL if Address Line 3 is populated  Should not be part of exlusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="addressLine3" minOccurs="0">
+				<annotation>
+					<documentation> Must not equal other address line  • Commas are not permitted in Address Lines • Where commas are found in Address Lines they should be used as a line break and then stripped out • 4 Address Lines need to be allowed for • Where addresses extend beyond 4 address lines, all remaining addresse information should be in address line 4 but without commas • Where the presence of a comma results in address details being moved to a line that already holds information, that information will need to be moved to the line   should not be NULL if Address Line 4 is populated  Should not be part of exlusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="addressLine4" minOccurs="0">
+				<annotation>
+					<documentation> • Commas are not permitted in Address Lines • Where commas are found in Address Lines they should be used as a line break and then stripped out • 4 Address Lines need to be allowed for • Where addresses extend beyond 4 address lines, all remaining addresse information should be in address line 4 but without commas • Where the presence of a comma results in address details being moved to a line that already holds information, that information will need to be moved to the line   must not repeat Address line 1 or 2 or 3  Should not be part of exlusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:AlphaNumericWithSeperators">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="city" nillable="false">
+				<annotation>
+					<documentation>Lookup not applied IC - ignore preposition rule ----apply to all</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+						<pattern value="[a-zA-Z\-/\.&apos; ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="country" nillable="false">
+				<annotation>
+					<documentation>Country lookup - DS to supply (Defaulted to United Kingdom) - 30 char version supplied</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+						<pattern value="[a-zA-Z\- ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="county" minOccurs="0">
+				<annotation>
+					<documentation>Postal county lookup applied</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+						<pattern value="[a-zA-Z\- ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="postalCode" nillable="false" minOccurs="0">
+				<annotation>
+					<documentation>Drives postcode anywhere lookup.  Can be freetext</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<pattern value="[a-zA-Z0-9 ]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="date" nillable="false">
+				<annotation>
+					<documentation>System Date</documentation>
+				</annotation>
+			</element>
+			<element name="validationStatus" nillable="false">
+				<annotation>
+					<documentation>Supply 'NV' if address modified, 'VB' if selected from Postcode anywhere</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<minLength value="1"/>
+						<maxLength value="20"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Phone">
+		<sequence>
+			<element name="phoneNumber" minOccurs="0">
+				<annotation>
+					<documentation>Supply if first character after the 00 or 0 or +[country code] is not '7', otherwise omit</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:Landline">
+						<maxLength value="16"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Email">
+		<sequence>
+			<element name="emailAddress" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="com:EmailAddress">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Mobile">
+		<sequence>
+			<element name="mobileNumber" minOccurs="0">
+				<annotation>
+					<documentation>Only one field shown at front-end, first character after the 00 or 0 or +[country code] is '7'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:Mobile">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Donations">
+		<sequence>
+			<element name="amount" nillable="false">
+				<annotation/>
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountCode-CRUK" nillable="false">
+				<annotation>
+					<documentation>CRUK Bank account</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dataSource" nillable="false">
+				<annotation>
+					<documentation>Supply 'ND'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dateReceived" type="date" nillable="false">
+				<annotation>
+					<documentation>Actual Donation Date i.e. when transaction was submitted by Supporter</documentation>
+				</annotation>
+			</element>
+			<element name="donationType" nillable="false">
+				<annotation>
+					<documentation>Supply 'Payment'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="financialPaymentReference" minOccurs="0">
+				<annotation>
+					<documentation>For WorlPay transactions- Derive in the format : 'SL (Prefix)  Captured Date Merchant No'  Date should be in format DD/MM/YYYY) Example - SL-21/10/2014ONL  For Paypal transactions- Derive in the format -   'PP (prefix)- Captured Date Merchant No' Date should be in format of DD/MM/YYYY Merchant No - in this case is the primary account number for Paypal</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+						<pattern value="[a-zA-Z0-9/-]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="letterCode" minOccurs="0">
+				<annotation>
+					<documentation>Letter codes based on email template  Must be part of Inclusion List</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentMethod" nillable="false">
+				<annotation>
+					<documentation>Send as 'Credit Card'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentStatus" nillable="false">
+				<annotation>
+					<documentation>Send as 'Completed'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="personalGiftAid" nillable="false">
+				<annotation/>
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="product" nillable="false">
+				<annotation>
+					<documentation>Set from Personal_Donation * N - Mapped from URL (gives us the appeal) to the appeal's VF product code * Y - Mapped from URL (gives us the appeal) to the appeal's product code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<annotation>
+					<documentation>Mapped from URL (gives us the appeal) to the appeal's campaign code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="thankingStatus" minOccurs="0">
+				<annotation>
+					<documentation>Send as blank</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="originatorPaymentID" nillable="false">
+				<annotation>
+					<documentation>Supply UUID</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="toBeGiftAided" nillable="false">
+				<annotation>
+					<documentation>Y' if supporter opts in to Gift Aid, 'N' if supporter does not opt in or even if option is not surfaced</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="letterCodeGAD" minOccurs="0">
+				<annotation>
+					<documentation>Letter codes based on email template  Must be part of Inclusion List</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="methodGAD" minOccurs="0">
+				<annotation>
+					<documentation>Default to 'Oral'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivation" minOccurs="0">
+				<annotation>
+					<documentation>Default to : 1. 'MEM' when Motivation selected is "I want to honour the memory of a loved one or friend"  2. 'CEL' when Motivation selected in "I'm celebrating someone close to me beating cancer".  3. For the rest of the Motivations default to Null  Should be part of Inclusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="inMemoryName" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentProviderTransactionId" minOccurs="0">
+				<annotation>
+					<documentation>Unique transaction reference otained from Paypal or World Pay</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="resCode" minOccurs="0">
+				<annotation>
+					<documentation>Unique RES Code for the restricion selected by supporter. Each Restriction selected transates to a unique RES Code  Should be part of Inclusion list</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="gadType" minOccurs="0">
+				<annotation>
+					<documentation>Default to 'Rolling'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="eventCode" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="GiftAidDeclaration">
+		<sequence>
+			<element name="confirmedOn" type="date" minOccurs="0">
+				<annotation>
+					<documentation>System Date</documentation>
+				</annotation>
+			</element>
+			<element name="declarationDate" type="date" nillable="false">
+				<annotation>
+					<documentation>System Date</documentation>
+				</annotation>
+			</element>
+			<element name="letterCode" minOccurs="0">
+				<annotation>
+					<documentation>Letter codes based on email template</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="method" nillable="false">
+				<annotation>
+					<documentation>To be supplied - set to 'Oral'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reference" minOccurs="0">
+				<annotation>
+					<documentation>Supply the record 'ND' + UUID</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<annotation>
+					<documentation>Source Code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="gadType" minOccurs="0">
+				<annotation>
+					<documentation>Default to 'Rolling'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="DirectDebit">
+		<sequence>
+			<element name="accountName" nillable="false">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="2"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="amount" nillable="false">
+				<annotation/>
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountNumber" nillable="false">
+				<annotation>
+					<documentation>Postcode Anywhere bank account validation - check digit on account and valid sort code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<minLength value="8"/>
+						<maxLength value="10"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankSortCode" nillable="false">
+				<annotation>
+					<documentation>Postcode Anywhere bank account validation - check digit on account and valid sort code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<length value="6"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountCode-CRUK" nillable="false">
+				<annotation>
+					<documentation>CRUK Bank Account</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="frequency" nillable="false">
+				<annotation>
+					<documentation>Translate radio to value of either 'Monthly', 'Quarterly', 'Annually'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="product" nillable="false">
+				<annotation>
+					<documentation>Set from Personal_Donation * N - Mapped from URL (gives us the appeal) to the appeal's VF product code * Y - Mapped from URL (gives us the appeal) to the appeal's product code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reference" nillable="false">
+				<annotation>
+					<documentation>Supply 'ND' + UUID</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<annotation>
+					<documentation>Set from Personal_Donation * N - Mapped from URL (gives us the appeal) to the appeal's VF product code * Y - Mapped from URL (gives us the appeal) to the appeal's product code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentDay" nillable="false">
+				<annotation>
+					<documentation>Send either '5' or '19'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="integer">
+						<enumeration value="5"/>
+						<enumeration value="19"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="toBeGiftAided" nillable="false">
+				<annotation>
+					<documentation>Y' if supporter opts in to Gift Aid, 'N' if supporter does not opt in or even if option is not surfaced</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="com:YNFlag"/>
+				</simpleType>
+			</element>
+			<element name="letterCodeGAD" minOccurs="0">
+				<annotation>
+					<documentation>Letter codes based on email template</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="methodGAD" minOccurs="0">
+				<annotation>
+					<documentation>Default to 'Oral'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="inMemoryName" minOccurs="0">
+				<annotation>
+					<documentation>The 'In Memory name' if provided </documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="motivation" minOccurs="0">
+				<annotation>
+					<documentation>Default to : 1. 'MEM' when Motivation selected is "I want to honour the memory of a loved one or friend"  2. 'CEL' when Motivation selected in "I'm celebrating someone close to me beating cancer".  3. For the rest of the Motivations default to Null</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dataSource" nillable="false">
+				<annotation>
+					<documentation>Supply 'ND'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="resCode" minOccurs="0">
+				<annotation>
+					<documentation>Unique RES Code for the restricion selected by supporter. Each Restriction selected transates to a unique RES Code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="gadType" minOccurs="0">
+				<annotation>
+					<documentation>Default to 'Rolling'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SuppressionsPreferences">
+		<sequence>
+			<element name="startDate" type="date" nillable="false">
+				<annotation>
+					<documentation>Supply system date</documentation>
+				</annotation>
+			</element>
+			<element name="suppressionPreferenceCode" nillable="false">
+				<annotation>
+					<documentation>For:  - Opt into email send 'EMO'  - Opt into SMS send 'SMS'  - Opt out of mail ampersand telephone send 'ECO'</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<annotation>
+					<documentation>Set from Personal_Donation * N - Mapped from URL (gives us the appeal) to the appeal's VF product code * Y - Mapped from URL (gives us the appeal) to the appeal's product code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="MailingActivities">
+		<sequence>
+			<element name="originatorActivityID" nillable="false">
+				<annotation>
+					<documentation>UUID</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="category" minOccurs="0">
+				<annotation/>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="endDate" type="dateTime" nillable="false">
+				<annotation>
+					<documentation>Same as Completed Date</documentation>
+				</annotation>
+			</element>
+			<element name="letterCode" minOccurs="0">
+				<annotation>
+					<documentation>Same as donation letter code</documentation>
+				</annotation>
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="transaction" type="tns:Transaction"/>
+</schema>

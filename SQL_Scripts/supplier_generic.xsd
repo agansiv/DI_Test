@@ -5,6 +5,10 @@ To be used in conjunction with commonTypesDI.xsd
 
 Version History
 ===============
+Version 34 Deepika Garg 22 Oct 2015
+===============================================================
+IBA-1306: Allow '&' in Address line 1 of XSD
+
 Version 33 Hemal Patel 20 Oct 2015
 ===============================================================
 IBA-1129: Internal/External key choice element in Opportunities, Opportunity Product, Opportunity Activity
@@ -357,9 +361,10 @@ Initial release for R18 Development
 		<sequence>
 			<element name="addressLine1" nillable="false">
 				<simpleType>
-					<restriction base="com:AlphaNumericWithSeperators">
+					<restriction base="token">
 						<minLength value="2"/>
 						<maxLength value="200"/>
+						<pattern value="[a-zA-Z0-9\-/\.&apos;&amp; ]*"/>
 					</restriction>
 				</simpleType>
 			</element>
@@ -1274,22 +1279,22 @@ Initial release for R18 Development
 					</restriction>
 				</simpleType>
 			</element>
-		<choice>
-			<element name="crukReference" minOccurs="0">
-				<simpleType>
-					<restriction base="token">
-						<maxLength value="100"/>
-					</restriction>
-				</simpleType>
-			</element>
-			<element name="externalReference" minOccurs="0">
-				<simpleType>
-					<restriction base="token">
-						<maxLength value="100"/>
-					</restriction>
-				</simpleType>
-			</element>
-		</choice>
+			<choice>
+				<element name="crukReference" minOccurs="0">
+					<simpleType>
+						<restriction base="token">
+							<maxLength value="100"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="externalReference" minOccurs="0">
+					<simpleType>
+						<restriction base="token">
+							<maxLength value="100"/>
+						</restriction>
+					</simpleType>
+				</element>
+			</choice>
 			<element name="department" nillable="false">
 				<simpleType>
 					<restriction base="token">
@@ -1384,22 +1389,22 @@ Initial release for R18 Development
 	</complexType>
 	<complexType name="OpportunityProduct">
 		<sequence>
-		<choice>
-			<element name="crukReference" minOccurs="0">
-				<simpleType>
-					<restriction base="token">
-						<maxLength value="30"/>
-					</restriction>
-				</simpleType>
-			</element>
-			<element name="externalReference" minOccurs="0">
-				<simpleType>
-					<restriction base="token">
-						<maxLength value="100"/>
-					</restriction>
-				</simpleType>
-			</element>
-		</choice>
+			<choice>
+				<element name="crukReference" minOccurs="0">
+					<simpleType>
+						<restriction base="token">
+							<maxLength value="30"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="externalReference" minOccurs="0">
+					<simpleType>
+						<restriction base="token">
+							<maxLength value="100"/>
+						</restriction>
+					</simpleType>
+				</element>
+			</choice>
 			<element name="dataSource" minOccurs="0">
 				<simpleType>
 					<restriction base="token">
@@ -1488,22 +1493,22 @@ Initial release for R18 Development
 	</complexType>
 	<complexType name="OpportunityActivities">
 		<sequence>
-		<choice> 
-			<element name="crukReference" minOccurs="0">
-				<simpleType>
-					<restriction base="token">
-						<maxLength value="30"/>
-					</restriction>
-				</simpleType>
-			</element>
-			<element name="externalReference" minOccurs="0">
-				<simpleType>
-					<restriction base="token">
-						<maxLength value="100"/>
-					</restriction>
-				</simpleType>
-			</element>
-		</choice>	
+			<choice>
+				<element name="crukReference" minOccurs="0">
+					<simpleType>
+						<restriction base="token">
+							<maxLength value="30"/>
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="externalReference" minOccurs="0">
+					<simpleType>
+						<restriction base="token">
+							<maxLength value="100"/>
+						</restriction>
+					</simpleType>
+				</element>
+			</choice>
 			<element name="dataSource" minOccurs="0">
 				<simpleType>
 					<restriction base="token">

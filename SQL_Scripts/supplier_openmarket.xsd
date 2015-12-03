@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Data Supplier Schema Definition for Open Market
+To be used in conjunction with commonTypesDI.xsd
+
+Version History
+===============
+Version 7 - 19 Oct 2015 - Deepika Garg
+=====================================
+IBA-1227 : Removed Regex Pattern validation on E-mail address and moved the validation to DI
+
+Version 6 - Dave Budd 8 Apr 2015
+=================================
+IN:019357: CRUK Bank Account Code should be optional
+
+Version 5 - Dave Budd 23 Mar 2015
+=================================
+- Donation.Financial Payment Reference to be non-mandatory
+- Removed Donation.Non-Gift Aid Reason
+
+Version 4
+=================================
+Ommitted to sync with sharepoint version number
+
+Version 3 - Dave Budd 19 Mar 2015
+=================================
+Supporter.surname minLnegth=1 
+
+Version 2 - Dave Budd 06 Mar 2015
+=================================
+Donation.Short Code mandatory
+
+Version 1 - Dave Budd 19 Feb 2015
+=================================
+R19 First Draft
+
+
+-->
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.cancerresearchuk.org/di/r19/supplier/openmarket" xmlns:com="http://www.cancerresearchuk.org/di/r17/commonTypes" targetNamespace="http://www.cancerresearchuk.org/di/r19/supplier/openmarket" elementFormDefault="qualified">
+	<import namespace="http://www.cancerresearchuk.org/di/r17/commonTypes" schemaLocation="commonTypesDI.xsd"/>
+	<complexType name="Supporter">
+		<sequence>
+			<element name="primaryExternalReferenceId" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="primaryDataSourceCode" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="forename" nillable="false">
+				<simpleType>
+					<restriction base="com:PartyNamePerson">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="startDate" type="dateTime" nillable="false"/>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="supporterURN" minOccurs="0">
+				<simpleType>
+					<restriction base="com:AlphaNumeric">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="surname" nillable="false">
+				<simpleType>
+					<restriction base="com:PartyNamePerson">
+						<minLength value="1"/>
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="lsdFlag" type="com:YNFlag" minOccurs="0"/>
+			<element name="lsdIdentifier" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="lsdType" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="contactInfo-Mobile" type="tns:ContactInfo-Mobile" minOccurs="0"/>
+			<element name="listOfDonations" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="donations" type="tns:Donations" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfSuppressionsPreferences" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="suppressionsPreferences" type="tns:SuppressionsPreferences" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+			<element name="listOfCampaignMembership" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="campaignMembership" type="tns:CampaignMembership" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Transaction">
+		<sequence>
+			<element name="externalTransactionId" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="supporter" type="tns:Supporter" nillable="false"/>
+		</sequence>
+	</complexType>
+	<complexType name="Batch">
+		<sequence>
+			<element name="id" type="integer" minOccurs="0"/>
+			<element name="listOfTransaction" minOccurs="0">
+				<complexType>
+					<sequence>
+						<element name="transaction" type="tns:Transaction" minOccurs="0" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="ContactInfo-Mobile">
+		<sequence>
+			<element name="mobileNumber" minOccurs="0">
+				<simpleType>
+					<restriction base="com:Mobile">
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="Donations">
+		<sequence>
+			<element name="amount" nillable="false">
+				<simpleType>
+					<restriction base="decimal">
+						<minExclusive value="0"/>
+						<fractionDigits value="2"/>
+						<totalDigits value="9"/>
+						<maxExclusive value="10000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="bankAccountCode-CRUK" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dataSource" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="dateReceived" type="dateTime" nillable="false"/>
+			<element name="donationType" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="financialPaymentReference" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+						<pattern value="[a-zA-Z0-9/-]*"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentMethod" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="paymentStatus" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="product" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="100"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="originatorPaymentID" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="shortCode" nillable="false">
+				<simpleType>
+					<restriction base="com:NumericOnly">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusDelay" type="integer" minOccurs="0"/>
+			<element name="statusDelayUnit" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="mobileOperator" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="50"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="keyword" minOccurs="0">
+				<simpleType>
+					<restriction base="token">
+						<maxLength value="140"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="SuppressionsPreferences">
+		<sequence>
+			<element name="startDate" type="date" nillable="false"/>
+			<element name="suppressionPreferenceCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="source" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType name="CampaignMembership">
+		<sequence>
+			<element name="campaignCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="outcome" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="versionCode" nillable="false">
+				<simpleType>
+					<restriction base="token">
+						<minLength value="1"/>
+						<maxLength value="30"/>
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="campaignRecipientToken" nillable="false">
+				<simpleType>
+					<restriction base="decimal">
+						<fractionDigits value="7"/>
+						<totalDigits value="22"/>
+						<maxExclusive value="1000000000000000"/>
+					</restriction>
+				</simpleType>
+			</element>
+		</sequence>
+	</complexType>
+	<element name="batch" type="tns:Batch"/>
+</schema>
